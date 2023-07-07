@@ -125,6 +125,7 @@ if (isset($_SESSION['student']) && !empty($_SESSION['student'])) {
 							</div>
 							<div class="form-group">
 								<div class="users">New User? <a href="register.php">Sign Up</a></div>
+								<div class="users">Admin? <a href="./adminLogin.php">Login</a></div>
 							</div>
 						</div>
 					</div>
