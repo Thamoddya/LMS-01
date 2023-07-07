@@ -7,6 +7,9 @@ if ($_SESSION['admin'] == null) {
     $admin = $_SESSION['admin'];
 }
 include_once "../connection.php";
+if ($_GET['Studentmobile'] == null) {
+    header('Location: ./admin.php');
+}
 $StudentMobile = $_GET['Studentmobile'];
 
 $stmt = $pdo->prepare("SELECT * FROM student INNER JOIN batch ON  student.batch_batchId = batch.batchId WHERE mobile = ? ");
@@ -92,7 +95,22 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <?php echo "Student No - " . $student['id'] ?>
                             </div>
                             <div class="text">
-                                <?php echo "Batch Name:- " . $student['batchName'] ?>
+                                <?php
+                                if ($student['batchName'] == null) {
+                                    echo "Batch Name:- null";
+                                } else {
+                                    echo "Batch Name:- " . $student['batchName'];
+                                }
+                                ?>
+                            </div>
+                            <div class="text text-primary">
+                                <?php
+                                if ($student['verifyed'] == '0') {
+                                    echo "Student Not Approved";
+                                } else {
+                                    echo "Student Approved";
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -149,25 +167,54 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
                                                                 <div class="col-lg-6 col-md-6 col-sm-12 form-group">
                                                                     <input type="text" placeholder="Address" required="" id="address" value="<?php echo $student['adress'] ?>" oninput="changeBorderColor(this)">
                                                                 </div>
+
+
                                                                 <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                                                    <input type="text" placeholder="Address" required="" value="<?php echo $student['password'] ?>" oninput="changeBorderColor(this)">
+                                                                    <input type="text" placeholder="Old Password" required="" id="Oldpassword" value="<?php echo $student['password'] ?>">
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                                                    <input type="text" placeholder="New Password" required="" id="newPassword">
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                                                    <input type="text" placeholder="Comfirm Password" required="" id="confirmPassword">
                                                                 </div>
 
+
+                                                                <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                                                    <select class="form-select" aria-label="Default select example" id="newBatch">
+                                                                        <option selected>Select New Batch</option>
+
+                                                                        <?php
+                                                                        $batchNamesForSelectGet = $pdo->prepare("SELECT * FROM batch INNER JOIN city ON city.cityId = batch.city_cityId  WHERE batchId<>'0'");
+                                                                        $batchNamesForSelectGet->execute();
+
+                                                                        while ($batchNamesForSelectGetRow = $batchNamesForSelectGet->fetch(PDO::FETCH_ASSOC)) {
+                                                                        ?>
+                                                                            <option value="<?php echo $batchNamesForSelectGetRow['batchId'] ?>">
+                                                                                <?php echo $batchNamesForSelectGetRow['batchName'] . " | " . $batchNamesForSelectGetRow['cityName'] . " | " . $batchNamesForSelectGetRow['grade'] ?>
+                                                                            </option>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                    <button onclick="batchAssign();" class="btn btn-primary mt-1">Assign batch To
+                                                                        Student</button>
+                                                                </div>
                                                                 <div class="col-lg-12 col-md-12 col-sm-12 form-group text-right">
                                                                     <?php
                                                                     if ($student['verifyed'] == '0') {
 
                                                                     ?>
-                                                                        <button class="theme-btn btn-style-three"><span class="txt">Approve Student<i class="fa fa-angle-right"></i></span></button>
+                                                                        <button class="theme-btn btn-style-three" onclick="approveStudent();"><span class="txt">Approve Student<i class="fa fa-angle-right"></i></span></button>
                                                                     <?php
                                                                     } else {
                                                                     ?>
-                                                                        <button disabled class="theme-btn btn-style-three"><span class="txt">Student Approved</span></button>
+                                                                        <button onclick="disapproveStudent();" class="theme-btn btn-style-three"><span class="txt">Disapprove Student<i class="fa fa-cross-icon"></span></button>
                                                                     <?php
                                                                     }
                                                                     ?>
                                                                     <button class="theme-btn btn-style-three" id="updateButton" onclick="updateMObile();"><span class="txt">Update Mobile<i class="fa fa-angle-right"></i></span></button>
-                                                                    <button class="theme-btn btn-style-six" class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"><span class="txt">Update Password<i class="fa fa-angle-right"></i></span></button>
+                                                                    <button class="theme-btn btn-style-three" onclick="passwordUpdate();">Update Password<i class="fa fa-angle-right"></i></span></button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -184,32 +231,6 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
         </section>
     </div>
 
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Update Password</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Old Password</label>
-                <input type="password" class="form-control" id="Oldpassword" value="<?php $student['password'] ?>">
-                <button type="button" class="showPasswordBtn" data-target="#Oldpassword">Show Password</button>
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">New Password</label>
-                <input type="password" class="form-control" id="newPassword">
-                <button type="button" class="showPasswordBtn" data-target="#newPassword">Show Password</button>
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="confirmPassword">
-                <button type="button" class="showPasswordBtn" data-target="#confirmPassword">Show Password</button>
-            </div>
-
-            <button class="theme-btn btn-style-three" onclick="passwordUpdate();"><span class="txt">Update Password<i class="fa fa-angle-right"></i></span></button>
-        </div>
-    </div>
 
 
     <?php
@@ -217,6 +238,111 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
     ?>
 
     <script>
+        const approveStudent = () => {
+            let Mobile = "<?php echo $student['mobile'] ?>";
+
+            var formData = new FormData();
+            formData.append('mobile', Mobile);
+            $.ajax({
+                url: './approveStudent.admin.php',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response == 'success') {
+                        swal.fire(
+                            'Success',
+                            'Student Approved',
+                            'success'
+                        );
+                        window.location.reload();
+                    } else {
+                        swal.fire(
+                            'Error',
+                            'Something went wrong',
+                            'error'
+                        );
+                    }
+                }
+            });
+        };
+        const disapproveStudent = () => {
+            let Mobile = "<?php echo $student['mobile'] ?>";
+
+            var formData = new FormData();
+            formData.append('mobile', Mobile);
+            $.ajax({
+                url: './disapproveSTudent.admin.php',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response == 'success') {
+                        swal.fire(
+                            'Success',
+                            'Student Disapproved',
+                            'success'
+                        );
+                        window.location.reload();
+                    } else {
+                        swal.fire(
+                            'Error',
+                            'Something went wrong',
+                            'error'
+                        );
+                    }
+                }
+            });
+        };
+        const batchAssign = () => {
+            const batchId = document.getElementById('newBatch').value;
+            let Mobile = "<?php echo $student['mobile'] ?>";
+            let nowBatchID = "<?php echo $student['batch_batchId'] ?>";
+
+            if (nowBatchID == batchId) {
+                swal.fire("You are already assigned to this batch");
+
+            } else {
+
+                if (batchId == 'Select New Batch') {
+                    swal.fire(
+                        'Error',
+                        'Please Select New Batch',
+                        'error'
+                    );
+                } else {
+                    var formData = new FormData();
+                    formData.append('batchId', batchId);
+                    formData.append('mobile', Mobile);
+
+                    $.ajax({
+                        url: './addBatch.student.php',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            if (response == 'success') {
+                                swal.fire(
+                                    'Success',
+                                    'Batch Assigned',
+                                    'success'
+                                );
+                                window.location.reload();
+                            } else {
+                                swal.fire(
+                                    'Error',
+                                    'Something went wrong',
+                                    'error'
+                                );
+                            }
+                        }
+                    });
+                }
+            }
+        }
         const updateMObile = () => {
             let studentNo = "<?php echo $student['id'] ?>";
             let oldMobile = "<?php echo $student['mobile'] ?>";
@@ -260,23 +386,7 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
             }
 
         };
-        $(document).ready(function() {
-            $(".showPasswordBtn").click(function() {
-                var target = $(this).data("target");
-                var passwordInput = $(target);
-                var passwordFieldType = passwordInput.attr("type");
-
-                // Toggle the password field visibility
-                if (passwordFieldType === "password") {
-                    passwordInput.attr("type", "text");
-                    $(this).text("Hide Password");
-                } else {
-                    passwordInput.attr("type", "password");
-                    $(this).text("Show Password");
-                }
-            });
-
-        });
+        
 
         const passwordUpdate = () => {
             let Oldpassword = "<?php echo $student['password'] ?>";
@@ -335,7 +445,6 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
             }
         };
     </script>
-
 </body>
 
 </html>

@@ -91,7 +91,6 @@ include_once "../connection.php";
 
               <ul class="student-editing">
                 <li data-tab="#prod-setting" class="tab-btn"><a>Edit Account</a></li>
-                <li><a href="#">Support Request</a></li>
               </ul>
             </div>
           </div>
@@ -191,6 +190,14 @@ include_once "../connection.php";
                                 include_once "./admin.layouts/main.studentTable1.php";
                                 ?>
                               </div>
+                              <div class="title-box mt-4">
+                                <h5>Verified Students</h5>
+                              </div>
+                              <div class="col-12 mt-3 overflow-auto">
+                                <?php
+                                include_once "./admin.layouts/main.studentTable2.php";
+                                ?>
+                              </div>
                             </div>
                           </div>
 
@@ -266,7 +273,7 @@ include_once "../connection.php";
     }
 
     const gotoStudentProfile = (mobile) => {
-      window.location.href=`./studentProfile.php?Studentmobile=${mobile}`;
+      window.location.href = `./studentProfile.php?Studentmobile=${mobile}`;
     }
   </script>
 </body>
