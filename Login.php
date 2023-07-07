@@ -1,5 +1,9 @@
 ﻿<?php
 session_start();
+if (isset($_SESSION['student']) && !empty($_SESSION['student'])) {
+  header('Location: ./student/index.php');
+  exit;
+}
 ?>
 <!DOCTYPE html>
 <html>

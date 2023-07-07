@@ -512,7 +512,7 @@ img {
   overflow: hidden;
   background: none;
   border-radius: 2px;
-  background-color: #ff5773;
+  background-color: #01aeda;
   text-transform: capitalize;
   font-family: "Poppins", sans-serif;
   -webkit-box-shadow: 0 10px 30px rgba(255, 98, 98, 0.1);
@@ -2443,12 +2443,12 @@ img {
   background: -webkit-linear-gradient(
     left,
     rgba(255, 255, 255, 0) 0%,
-    rgba(0, 171, 21, 0.4) 100%
+    rgba(0, 174, 255, 0.4) 100%
   );
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 0) 0%,
-    rgba(0, 171, 21, 0.4) 100%
+    rgba(9, 88, 124, 0.4) 100%
   );
   -webkit-transform: skewX(-25deg);
   transform: skewX(-25deg);
@@ -4887,7 +4887,7 @@ img {
 }
 
 .price-block.style-two .inner-box .price {
-  color: #00ab15;
+  color: #1ca7df;
 }
 
 .price-page-section {
@@ -4897,12 +4897,12 @@ img {
 
 .price-page-section .pricing-tabs .tab-buttons .tab-btn:hover,
 .price-page-section .pricing-tabs .tab-buttons .tab-btn.active-btn {
-  color: #00ab15;
+  color: #2d30eb;
 }
 
 .price-page-section .pricing-tabs .tab-buttons .tab-btn:hover::after,
 .price-page-section .pricing-tabs .tab-buttons .tab-btn.active-btn::after {
-  background-color: #00ab15;
+  background-color: #1586d1;
 }
 
 /*** 
@@ -8078,12 +8078,12 @@ img {
   background: -webkit-linear-gradient(
     left,
     rgba(255, 255, 255, 0) 0%,
-    rgba(0, 171, 21, 0.4) 100%
+    rgba(18, 112, 201, 0.4) 100%
   );
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 0) 0%,
-    rgba(0, 171, 21, 0.4) 100%
+    rgba(6, 120, 212, 0.4) 100%
   );
   -webkit-transform: skewX(-25deg);
   transform: skewX(-25deg);
@@ -8129,7 +8129,7 @@ img {
 }
 
 .cource-block-two .inner-box .lower-content h5 a:hover {
-  color: #00ab15;
+  color: #09a6ce;
 }
 
 .cource-block-two .inner-box .lower-content .text {
@@ -8153,7 +8153,7 @@ img {
 
 .cource-block-two .inner-box .lower-content .hours {
   position: relative;
-  color: #00ab15;
+  color: #196ccc;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.4em;
@@ -8630,7 +8630,7 @@ img {
 }
 
 .cource-block-three .inner-box h5 a:hover {
-  color: #00ab15;
+  color: #123697;
 }
 
 .cource-block-three .inner-box .text {
@@ -8655,7 +8655,7 @@ img {
 
 .cource-block-three .inner-box .hours {
   position: relative;
-  color: #00ab15;
+  color: #0f79cf;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.4em;
@@ -8753,7 +8753,7 @@ img {
 
 .cource-block-four .inner-box .hours {
   position: relative;
-  color: #00ab15;
+  color: #0859b6;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.4em;
@@ -8896,7 +8896,7 @@ img {
 
 .topic-block .inner-box .hours {
   position: relative;
-  color: #00ab15;
+  color: #09b6eb;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.4em;
@@ -9934,7 +9934,7 @@ img {
 .books-page-section .books-tabs .tab-btns .tab-btn:hover,
 .books-page-section .books-tabs .tab-btns .tab-btn.active-btn {
   color: #ffffff;
-  background: #00ab15;
+  background: #14a4e7;
 }
 
 .books-page-section .books-tabs .tabs-content {
@@ -10505,7 +10505,7 @@ img {
 }
 
 .profile-section .image-column .social-box a:hover {
-  color: #00ab15;
+  color: #0fbdd4;
 }
 
 .profile-section .browse-course-section {
@@ -10707,7 +10707,7 @@ img {
 .student-profile-section .profile-tabs .tab-btns .tab-btn:hover,
 .student-profile-section .profile-tabs .tab-btns .tab-btn.active-btn {
   color: #ffffff;
-  background: #00ab15;
+  background: #0067ab;
 }
 
 .student-profile-section .profile-tabs .tabs-content {
@@ -10843,7 +10843,7 @@ img {
 .edit-profile-section .edit-profile-tabs .tab-btns .tab-btn:hover,
 .edit-profile-section .edit-profile-tabs .tab-btns .tab-btn.active-btn {
   color: #ffffff;
-  background: #00ab15;
+  background: #11b3e4;
 }
 
 .edit-profile-section .edit-profile-tabs .tabs-content {
