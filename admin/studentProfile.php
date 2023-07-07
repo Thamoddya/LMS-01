@@ -166,7 +166,7 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
                                                                     <?php
                                                                     }
                                                                     ?>
-                                                                    <button class="theme-btn btn-style-three" id="updateButton"><span class="txt">Update Mobile<i class="fa fa-angle-right"></i></span></button>
+                                                                    <button class="theme-btn btn-style-three" id="updateButton" onclick="updateMObile();"><span class="txt">Update Mobile<i class="fa fa-angle-right"></i></span></button>
                                                                     <button class="theme-btn btn-style-six" class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"><span class="txt">Update Password<i class="fa fa-angle-right"></i></span></button>
                                                                 </div>
                                                             </div>
@@ -217,6 +217,49 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
     ?>
 
     <script>
+        const updateMObile = () => {
+            let studentNo = "<?php echo $student['id'] ?>";
+            let oldMobile = "<?php echo $student['mobile'] ?>";
+            let newMobile = $("#mobile").val();
+
+            var formData = new FormData();
+            formData.append("mobile", newMobile);
+            formData.append("studentNo", studentNo);
+
+            if (oldMobile == newMobile) {
+                swal.fire(
+                    'Student Account',
+                    'mobiles are same',
+                    'question'
+                );
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: './studentUpdate.mobile.php',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        console.log(response);
+                        if (response == 'success') {
+                            swal.fire(
+                                'Student Account',
+                                'Student Mobile has been updated successfully',
+                                'succeess'
+                            );
+                            window.location.href = './admin.php';
+                        } else {
+                            Swal.fire(
+                                'Account Details',
+                                'Please try Changing your data or Try again',
+                                'question'
+                            );
+                        }
+                    }
+                });
+            }
+
+        };
         $(document).ready(function() {
             $(".showPasswordBtn").click(function() {
                 var target = $(this).data("target");
@@ -233,36 +276,6 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
                 }
             });
 
-            $("#updateButton").click(function() {
-                let studentNo = "<?php echo $student['id'] ?>";
-                var formData = new FormData();
-                formData.append("mobile", $("#mobile").val());
-                formData.append("studentNo", studentNo);
-
-                $.ajax({
-                    type: 'POST',
-                    url: '',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        console.log(response);
-                        if (response == 'success') {
-                            swal.fire(
-                                'Student Account',
-                                'Student Mobile has been updated successfully',
-                                'succeess'
-                            );
-                        } else {
-                            Swal.fire(
-                                'Account Details',
-                                'Please try Changing your data or Try again',
-                                'question'
-                            );
-                        }
-                    }
-                });
-            });
         });
 
         const passwordUpdate = () => {
@@ -290,22 +303,26 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
                     'question'
                 );
             } else {
+                let Mobile = "<?php echo $student['mobile'] ?>";
                 const passwordData = new FormData();
                 passwordData.append("newPassword", newPassword);
+                passwordData.append("mobile", Mobile);
 
                 $.ajax({
                     type: 'POST',
-                    url: '../student/updatePassword.student.php',
+                    url: './updatepassword.student.php',
                     data: passwordData,
                     contentType: false,
                     processData: false,
                     success: function(response) {
+                        console.log(response);
                         if (response === 'success') {
                             swal.fire(
                                 'Student Password',
                                 'Student Password has been updated successfully',
                                 'succeess'
                             );
+                            window.location.reload();
                         } else {
                             Swal.fire(
                                 'Account Details',
@@ -318,6 +335,7 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
             }
         };
     </script>
+
 </body>
 
 </html>
