@@ -386,7 +386,7 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
             }
 
         };
-        
+
 
         const passwordUpdate = () => {
             let Oldpassword = "<?php echo $student['password'] ?>";

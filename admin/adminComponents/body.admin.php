@@ -20,3 +20,4 @@
 <script src="../assets/js/script.js"></script>
 <script src="./admin.assets/js/admin.main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
