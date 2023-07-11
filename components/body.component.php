@@ -14,7 +14,20 @@
 <script src="./assets/js/tilt.jquery.min.js"></script>
 <!--Master Sl./assets/ider-->
 <script src="./assets/js/jquery.easing.min.js"></script>
+<script src="./assets/js/magic_mouse.min.js"></script>
 <script src="./assets/js/owl.js"></script>
 <script src="./assets/js/wow.js"></script>
 <script src="./assets/js/jquery-ui.js"></script>
 <script src="./assets/js/script.js"></script>
+
+<script type="text/javascript">
+        options = {
+            "cursorOuter": "circle-basic",
+            "hoverEffect": "circle-move",
+            "hoverItemMove": false,
+            "defaultCursor": false,
+            "outerWidth": 30,
+            "outerHeight": 30
+        };
+        magicMouse(options);
+    </script>

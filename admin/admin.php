@@ -224,7 +224,6 @@ include_once "../connection.php";
                             aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar" style="width: 0%">0%</div>
                           </div>
-
                         </div>
                         <button class="theme-btn mt-2 btn-style-three" onclick="UploadVideo();">Upload Video<i
                             class="fa fa-angle-right"></i></button>
@@ -258,33 +257,28 @@ include_once "../connection.php";
                             </select>
                           </div>
 
-
                           <div class="col-12 mt-1">
                             <div class="col-12 mt-1">
                               <video id="UnitVideoLink" class="video-js vjs-default-skin col-12" controls preload="auto"
                                 height="500" width="100%" poster="" data-setup='{
                               }'>
-                                <source id="videoSource" src="videos/NEELICT TV advertisements.mp4" type="video/mp4" />
+                                <source id="videoSource" src="" type="video/mp4" />
                               </video>
 
                             </div>
                           </div>
-
                         </div>
-
                       </div>
                     </div>
 
                     <!-- Tab -->
                     <div class="tab" id="prod-student">
                       <div class="content">
-
                         <div class="content">
                           <div class="container-fluid">
-
                             <div class="row">
+                              
                               <div class="col-12 mt-2">
-
                                 <div class="row g-3 align-items-center">
                                   <div class="col-auto">
                                     <label for="inputPassword6" class="col-form-label">Student Mobile</label>
@@ -465,7 +459,6 @@ include_once "../connection.php";
       let selectedOption = $('#loadVideoData option:selected');
       let videoLink = selectedOption.attr('data-videoLink');
 
-      // Set the video source and load the video player
       $('#videoSource').attr('src', videoLink);
       videojs('UnitVideoLink').src(videoLink);
       videojs('UnitVideoLink').load();

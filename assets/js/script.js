@@ -6,6 +6,8 @@ window.addEventListener("load", function () {
 });
 
 
+
+
 (function($) {
 
     "use strict";
@@ -554,3 +556,5 @@ window.addEventListener("load", function () {
 
 
 })(window.jQuery);
+
+

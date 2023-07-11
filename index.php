@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@
         <!-- Preloader -->
         <!-- Main Header-->
         <header class="main-header header-style-one">
-            
+
             <!-- Header Top -->
             <?php
             include_once "./layout/headerTop.layout.php";
@@ -155,11 +155,11 @@
             </div>
         </section>
         <!-- End Testimonial Section -->
-        
+
         <!-- Call To Action Section Two -->
         <?php
-    include_once "./layout/getting-started.layout.php";
-    ?>
+        include_once "./layout/getting-started.layout.php";
+        ?>
         <!-- End Call To Action Section Two -->
     </div>
     <?php
@@ -171,6 +171,8 @@
     ?>
     <script modeule src="./assets/js/slider.js">
     </script>
+
+
 </body>
 
 </html>
