@@ -260,12 +260,34 @@ include_once "../connection.php";
                           <div class="col-12 mt-1">
                             <div class="col-12 mt-1">
                               <video id="UnitVideoLink" class="video-js vjs-default-skin col-12" controls preload="auto"
-                                height="500" width="100%" poster="" data-setup='{
+                                height="500" width="100%" data-setup='{
                               }'>
-                                <source id="videoSource" src="" type="video/mp4" />
+                                <source id="videoSource" src="./videos/NEELICT TV advertisements.mp4"
+                                  type="video/mp4" />
                               </video>
 
                             </div>
+                          </div>
+
+                          <div class="col-12 mt-2">
+                            <div class="row">
+                              <hr>
+                              <div class="col-12">
+                                <h6>Private Videos</h6>
+                              </div>
+                              <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                <select class="form-select border-primary" aria-label="Default select example"
+                                  id="loadPrivateVideoData">
+                                </select>
+                              </div>
+
+                              <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                <select class="form-select border-primary" id="loadPrivateVideoDataVithVideo">
+                                </select>
+                              </div>
+                            </div>
+                            <button class="theme-btn mt-2 btn-style-three" onclick="addPrivateVideoToBatch();">Assign
+                              Video To Batch</button>
                           </div>
                         </div>
                       </div>
@@ -277,7 +299,7 @@ include_once "../connection.php";
                         <div class="content">
                           <div class="container-fluid">
                             <div class="row">
-                              
+
                               <div class="col-12 mt-2">
                                 <div class="row g-3 align-items-center">
                                   <div class="col-auto">
@@ -411,7 +433,6 @@ include_once "../connection.php";
                                         </div>
                                       </div>
                                     </div>
-
                                   </div>
 
                                 </div>
@@ -439,6 +460,30 @@ include_once "../connection.php";
   <script>
     let subjectID;
 
+  
+    const addPrivateVideoToBatch = () => {
+      let provateVideoId = $('#loadPrivateVideoData').val();
+      let batchId = $('#loadPrivateVideoDataVithVideo').val();
+
+      let formData = new FormData();
+      formData.append('privateVideoId', provateVideoId);
+      formData.append('batchId', batchId);
+
+      $.ajax({
+        url: './addVideoTobatch.admin.php',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+          swal.fire(response);
+        },
+        error: function (xhr, status, error) {
+          console.log(xhr.responseText);
+        }
+      });
+    }
+
     const selectedUnit = () => {
       let selectedSubjectId = $('#gotSelectedSubject').val();
       $.ajax({
@@ -454,6 +499,34 @@ include_once "../connection.php";
         }
       });
     };
+    const selectPrivateVideo = () => {
+      $.ajax({
+        url: './getPrivateVideoData.admin.php',
+        type: 'POST',
+        success: function (response) {
+          // Populate the second select tab with the fetched units
+          $('#loadPrivateVideoData').html(response);
+        },
+        error: function (xhr, status, error) {
+          console.log(xhr.responseText);
+        }
+      });
+    };
+    const setnotSetVideoData = () => {
+      $.ajax({
+        url: './getPrivateVideoDataPrivate.admin.php',
+        type: 'POST',
+        success: function (response) {
+          // Populate the second select tab with the fetched units
+          $('#loadPrivateVideoDataVithVideo').html(response);
+        },
+        error: function (xhr, status, error) {
+          console.log(xhr.responseText);
+        }
+      });
+    };
+    selectPrivateVideo();
+    setnotSetVideoData();
 
     function openVideoLink() {
       let selectedOption = $('#loadVideoData option:selected');
