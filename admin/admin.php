@@ -150,17 +150,17 @@ include_once "../connection.php";
                               <div class="col-12 mt-2">
                                 <div class="input-group ">
                                   <span class="input-group-text" id="basic-addon1">Batch Name</span>
-                                  <input type="text" id="getBatchName" class="form-control" placeholder="batch Name" aria-label="batch Name"
-                                    aria-describedby="basic-addon1">
+                                  <input type="text" id="getBatchName" class="form-control" placeholder="batch Name"
+                                    aria-label="batch Name" aria-describedby="basic-addon1">
                                 </div>
                               </div>
                               <div class="col-12 mt-2">
-                                <select class="form-select" id="getbatchGrade" >
+                                <select class="form-select" id="getbatchGrade">
                                   <option selected value="12">Greade 12</option>
                                   <option selected value="13">Greade 13</option>
                                 </select>
                               </div>
-                              
+
 
                               <div class="col-12 mt-2">
                                 <select class="form-select" id="getbatchCityId">
@@ -181,7 +181,7 @@ include_once "../connection.php";
                               <div class="col-12 mt-2">
                                 <button class="btn btn-primary" onclick="addNewBatch();">ADD BATCH</button>
                               </div>
-                              
+
 
                             </div>
                           </div>
@@ -192,21 +192,75 @@ include_once "../connection.php";
                           <div class="col-12">
                             <div class="row">
 
-                              <select class="form-select" aria-label="Default select example">
-                                <option selected>Select Batch</option>
-                                <?php
-                                $getBatchData = $pdo->prepare('SELECT * FROM batch');
-                                $getBatchData->execute();
-                                while ($rowOfBatchData = $getBatchData->fetch(PDO::FETCH_ASSOC)) {
-                                ?>
-                                <option value="<?php echo $rowOfBatchData['batchId']; ?>">
-                                  <?php echo $rowOfBatchData['batchName']; ?>
-                                </option>
-                                <?php
-                                }
-                                ?>
-                              </select>
+                              <div class="col-12">
+                                <select class="form-select" id="getLoadedBatch">
+                                  <option selected>Select Batch</option>
+                                  <?php
+                                  $getBatchData = $pdo->prepare('SELECT * FROM batch where batchStatus = ? ');
+                                  $getBatchData->execute(['1']);
+                                  while ($rowOfBatchData = $getBatchData->fetch(PDO::FETCH_ASSOC)) {
+                                  ?>
+                                  <option value="<?php echo $rowOfBatchData['batchId']; ?>">
+                                    <?php echo $rowOfBatchData['batchName']; ?>
+                                  </option>
+                                  <?php
+                                  }
+                                  ?>
+                                </select>
+                              </div>
+                              <div class="col-12 mt-2">
+                                <button class="btn btn-primary" onclick="checkStudents();">Check Students</button>
+                                <button class="btn btn-danger" onclick="turnOffbatch();">Turn Off</button>
+                              </div>
+                              <div class="col-12 mt-3">
+                                <table class="table rounded rounded-3">
 
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">#</th>
+                                      <th scope="col">Mobile</th>
+                                      <th scope="col">First Name</th>
+                                      <th scope="col">Last Name</th>
+                                      <th scope="col">Email</th>
+                                      <th scope="col">Status</th>
+                                      <th scope="col">Batch Name</th>
+                                      <th scope="col">Visit</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="table-body" class="table-group-divider overflow-auto">
+
+                                  </tbody>
+                                </table>
+
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-12 mt-1">
+                            <h4>Down Batch</h4>
+                          </div>
+                          <div class="col-12">
+                            <div class="row">
+
+                              <div class="col-12">
+                                <select class="form-select" id="getOffBatch">
+                                  <option selected>Select Batch</option>
+                                  <?php
+                                  $getBatchData = $pdo->prepare('SELECT * FROM batch where batchStatus = ? ');
+                                  $getBatchData->execute(['0']);
+                                  while ($rowOfBatchData = $getBatchData->fetch(PDO::FETCH_ASSOC)) {
+                                  ?>
+                                  <option value="<?php echo $rowOfBatchData['batchId']; ?>">
+                                    <?php echo $rowOfBatchData['batchName']; ?>
+                                  </option>
+                                  <?php
+                                  }
+                                  ?>
+                                </select>
+                              </div>
+                              <div class="col-12 mt-2">
+                                <button class="btn btn-success" onclick="turnOnBatch();">Turn On</button>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -291,14 +345,172 @@ include_once "../connection.php";
   <script>
     let subjectID;
 
-    const addNewBatch = ()=>{
+    const checkStudents = () => {
+      const batchID = $('#getLoadedBatch').val();
+
+      $.ajax({
+        url: './admin.layouts/checkStudents.table.php',
+        type: 'POST',
+        data: { batchID: batchID },
+        success: function (response) {
+          const students = JSON.parse(response);
+
+          $('#table-body').empty();
+
+          students.forEach((student, index) => {
+            const row = `<tr>
+                      <th scope="row">${index + 1}</th>
+                      <td>${student.mobile}</td>
+                      <td>${student.firstName}</td>
+                      <td>${student.lastName}</td>
+                      <td>${student.email}</td>
+                      <td>${student.statusName}</td>
+                      <td>${student.batchName}</td>
+                      <td><button type="button" class="admin-button-1" onclick="gotoStudentProfile('${student.mobile}');">Go Profile</button></td>
+                    </tr>`;
+            $('#table-body').append(row);
+          });
+        },
+        error: function (xhr, status, error) {
+          console.log(xhr.responseText);
+        }
+      });
+    };
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success m-1',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    });
+
+
+    const turnOnBatch = () => {
+      let batchID = $('#getOffBatch').val();
+
+      let formData = new FormData();
+      formData.append('batchID', batchID);
+
+      $.ajax({
+        url: './turnOnBatch.admin.php',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+          if (response == 'success') {
+            swalWithBootstrapButtons.fire(
+              'ON!',
+              'The Batch has been Turned ON.',
+              'success'
+            )
+            window.location.reload();
+          };
+        },
+        error: function (xhr, status, error) {
+          console.log(xhr.responseText);
+        }
+      });
+    };
+
+    const turnOffbatch = () => {
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "This will affect to Students in batch, They can't Log to Portal when batch Turn Off & can't assign students to that batch More...",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Turn Off!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          let batchID = $('#getLoadedBatch').val();
+
+          let formData = new FormData();
+          formData.append('batchID', batchID);
+
+          $.ajax({
+            url: './batchOFF.admin.php',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+              console.log(response);
+              if (response == 'success') {
+                swalWithBootstrapButtons.fire(
+                  'OFF!',
+                  'The Batch has been Turned Off.',
+                  'success'
+                )
+                window.location.reload();
+              };
+            },
+            error: function (xhr, status, error) {
+              console.log(xhr.responseText);
+            }
+          });
+        } else if (
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'The batch is safe :)',
+            'error'
+          )
+        }
+      })
+    };
+
+    const addNewBatch = () => {
       let name = $('#getBatchName').val();
       let city = $('#getbatchCityId').val();
       let grade = $('#getbatchGrade').val();
 
-      alert(name);
-      alert(city);
-      alert(grade);
+      if (name == '' || city == null) {
+        swal.fire('Please Complete all data');
+      } else {
+
+        let formData = new FormData();
+        formData.append('name', name);
+        formData.append('city', city);
+        formData.append('grade', grade);
+
+        Swal.fire({
+          title: 'Comfirm To Add Batch?',
+          showDenyButton: true,
+          showCancelButton: false,
+          confirmButtonText: 'Save',
+          denyButtonText: `Cancel Process`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: './addNewBatch.admin.php',
+              type: 'POST',
+              data: formData,
+              contentType: false,
+              processData: false,
+              success: function (response) {
+                if (response == 'success') {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'BATCH REGISTRATION',
+                    text: 'Batch added successfully',
+                  });
+                } else {
+                  console.log(response);
+                }
+              },
+              error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+              }
+            });
+          } else if (result.isDenied) {
+            Swal.fire('Changes are not saved', '', 'info')
+          }
+        })
+      }
     }
 
     const loadVideosToBatch = () => {
@@ -395,7 +607,6 @@ include_once "../connection.php";
           subjectId: selectedSubjectId
         },
         success: function (response) {
-          // Populate the second select tab with the fetched units
           $('#loadVideoData').html(response);
         },
         error: function (xhr, status, error) {
@@ -408,7 +619,6 @@ include_once "../connection.php";
         url: './getPrivateVideoData.admin.php',
         type: 'POST',
         success: function (response) {
-          // Populate the second select tab with the fetched units
           $('#loadPrivateVideoData').html(response);
         },
         error: function (xhr, status, error) {
@@ -421,7 +631,6 @@ include_once "../connection.php";
         url: './getPrivateVideoDataPrivate.admin.php',
         type: 'POST',
         success: function (response) {
-          // Populate the second select tab with the fetched units
           $('#loadPrivateVideoDataVithVideo').html(response);
         },
         error: function (xhr, status, error) {
@@ -626,8 +835,9 @@ include_once "../connection.php";
 
     const gotoStudentProfile = (mobile) => {
       window.location.href = `./studentProfile.php?Studentmobile=${mobile}`;
-    }
+    };
   </script>
+
 </body>
 
 </html>

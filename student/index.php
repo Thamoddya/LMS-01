@@ -20,9 +20,14 @@ include_once "../connection.php";
   include_once "./studentComponents/header.student.php";
   include_once "./studentComponents/responsive.student.php";
   ?>
+  <style>
+    body {
+      overflow-x: hidden;
+    }
+  </style>
 </head>
 
-<body class="">
+<body>
 
   <?php
   include_once "../components/preloader.component.php";
@@ -74,8 +79,30 @@ include_once "../connection.php";
       </div>
     </header>
 
-    <section class="student-profile-section">
 
+    <section class="student-profile-section">
+      <div class="row">
+
+        <?php
+        $currentMonthName = date('F');
+        $currentYear = date('Y');
+        $getInvoiceData = $pdo->prepare("SELECT * FROM invoice INNER JOIN `month` ON `month`.id = invoice.month_id INNER JOIN `year` ON `year`.id = invoice.year_id  WHERE `month`.`monthName`= ? AND invoice.student_id = ? AND `year`.yearName = ? ORDER BY invoice.id ASC LIMIT 1");
+        $getInvoiceData->execute([$currentMonthName, $student['id'], $currentYear]);
+        ?>
+
+        <div class="col-12 col-md-8 offset-md-2 text-center">
+
+          <?php
+          if ($getInvoiceData->rowCount() > 0) {
+            $invoiceData = $getInvoiceData->fetch(PDO::FETCH_ASSOC);
+            echo '<div class="alert alert-primary" role="alert">You paid for ' . $currentMonthName . ' | INVOICE ID #' . $invoiceData['invoiceId'] . '</div>';
+          } else {
+            echo ' <div class="alert alert-warning" role="alert"> Pay Your Class Fee For Month - ' . $currentMonthName . '</div>';
+          }
+          ?>
+
+        </div>
+      </div>
       <div class="circle-one"></div>
       <div class="circle-two"></div>
       <div class="auto-container">
@@ -146,7 +173,20 @@ include_once "../connection.php";
                         <div class="row clearfix">
 
                           <?php
-                          include_once "./videoTitle.php";
+
+                          if ($getInvoiceData->rowCount() > 0) {
+                            include_once "./videoTitle.php";
+                          } else {
+
+                            $previousMonth = date('F', strtotime('last month'));
+                            $getLastMonthpayment = $pdo->prepare("SELECT * FROM invoice INNER JOIN `month` ON `month`.id = invoice.month_id INNER JOIN `year` ON `year`.id = invoice.year_id  WHERE `month`.`monthName`= ? AND invoice.student_id = ? AND `year`.yearName = ? ORDER BY invoice.id ASC LIMIT 1");
+                            $getLastMonthpayment->execute([$previousMonth, $student['id'], $currentYear]);
+                            if ($getLastMonthpayment->rowCount() > 0) {
+                              include_once "./videoTitle.php";
+                            }else{
+                              echo ' <div class="alert alert-danger" role="alert"> Pay Your Class Fee For Month - '.$previousMonth.' & ' . $currentMonthName . ' To unlock The Video Area.If There Any Error , Please Contact Admin.</div>';
+                            }
+                          }
                           ?>
 
                         </div>
@@ -161,7 +201,9 @@ include_once "../connection.php";
                       <div class="content">
 
                         <div class="row clearfix">
-
+                          <div class="col-12">
+                            
+                          </div>
                         </div>
 
                       </div>
@@ -264,28 +306,10 @@ include_once "../connection.php";
       <button class="theme-btn btn-style-three" onclick="passwordUpdate();"><span class="txt">Update Password<i class="fa fa-angle-right"></i></span></button>
     </div>
   </div>
-  <!-- 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-6 mt-2">
-          <video id="my-video1" class="video-js vjs-default-skin col-12" controls preload="auto" height="500" width="100%" poster="./videos/videoplayback.mp4" data-setup='{}'>
-            <source src="./videos/videoplayback.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div class="col-6 mt-2">
-          <video id="my-video2" class="video-js vjs-default-skin col-12" controls preload="auto" height="500" width="100%" poster="./videos/videoplayback.mp4" data-setup='{}'>
-            <source src="./videos/videoplayback.mp4" type="video/mp4" />
-          </video>
-        </div>
-      </div>
-    </div>
-   -->
-
   <?php
   include_once "./studentComponents/body.student.php";
   ?>
   <script>
-
     function openVideoLink() {
       let selectedOption = $('#loadVideoData option:selected');
       let videoLink = selectedOption.attr('data-videoLink');

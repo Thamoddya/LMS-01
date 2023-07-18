@@ -21,6 +21,9 @@ if (strlen($StudentMobile) == 10) {
 $stmt = $pdo->prepare("SELECT * FROM student INNER JOIN batch ON  student.batch_batchId = batch.batchId WHERE mobile = ? ");
 $stmt->execute([$StudentMobile]);
 $student = $stmt->fetch(PDO::FETCH_ASSOC);
+if($student==null){
+    header('Location: ./admin.php');
+}
 
 ?>
 <!DOCTYPE html>
@@ -195,7 +198,8 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
                                                                         <option selected>Select New Batch</option>
 
                                                                         <?php
-                                                                        $batchNamesForSelectGet = $pdo->prepare("SELECT * FROM batch INNER JOIN city ON city.cityId = batch.city_cityId  WHERE batchId<>'0'");
+
+                                                                        $batchNamesForSelectGet = $pdo->prepare("SELECT * FROM batch INNER JOIN city ON city.cityId = batch.city_cityId  WHERE batchId<>'".$student['batch_batchId']."' AND batchStatus= '1'");
                                                                         $batchNamesForSelectGet->execute();
 
                                                                         while ($batchNamesForSelectGetRow = $batchNamesForSelectGet->fetch(PDO::FETCH_ASSOC)) {
