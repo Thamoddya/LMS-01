@@ -14,7 +14,7 @@ include_once "../connection.php";
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NEEL ICT | STUDENT</title>
+  <title>NEEL ICT | ADMIN</title>
 
   <?php
   include_once "./adminComponents/header.admin.php";
@@ -119,33 +119,11 @@ include_once "../connection.php";
                     <!--Tab / Active Tab-->
                     <div class="tab active-tab" id="prod-overview">
                       <div class="content">
-                        <!-- Sec Title -->
-                        <div class="sec-title">
-                          <h4>Student Home</h4>
-                        </div>
-                        <div class="container-fluid">
-                          <div class="row">
 
-                            <div
-                              class="mt-1 mt-md-0 col-md-4 h-25 offset-md-1 d-flex justify-content-center align-items-center bg-secondary rounded-2 p-4 mb-3 mr-3">
-                              <h5 class="text-white">Total Students : 500</h5>
-                            </div>
-                            <div
-                              class="mt-1 mt-md-0 col-md-4 h-25 offset-md-2 d-flex justify-content-center align-items-center bg-secondary rounded-2 p-4 mb-3 mr-3">
-                              <h5 class="text-white">Total Videos : 500</h5>
-                            </div>
-                            <div class="col-12 mt-1">
-                              <h4>Latest Registed Students</h4>
-                            </div>
+                        <?php
+                        include_once "./overview.admin.php";
+                        ?>
 
-                            <div class="col-12 mt-1 overflow-auto">
-                              <?php
-                              include_once "./admin.layouts/main.table1.php";
-                              ?>
-                            </div>
-
-                          </div>
-                        </div>
 
                       </div>
                     </div>
@@ -168,7 +146,24 @@ include_once "../connection.php";
                           <div class="col-12 mt-1">
                             <h4>Registed Batch</h4>
                           </div>
+                          <div class="col-12">
+                            <div class="row">
 
+                              <select class="form-select" aria-label="Default select example">
+                                <option selected>Select Batch</option>
+                                <?php
+                                $getBatchData = $pdo->prepare('SELECT * FROM batch');
+                                $getBatchData->execute();
+                                while ($rowOfBatchData = $getBatchData->fetch(PDO::FETCH_ASSOC)) {
+                                ?>
+                                  <option value="<?php echo $rowOfBatchData['batchId']; ?>"><?php echo $rowOfBatchData['batchName']; ?></option>
+                                <?php
+                                }
+                                ?>
+                              </select>
+
+                            </div>
+                          </div>
                         </div>
 
                       </div>
@@ -179,116 +174,10 @@ include_once "../connection.php";
                       <div class="content">
 
                         <div class="row clearfix">
+                          <?php
+                          include_once "./video.admin.php";
+                          ?>
 
-                          <div class="col-12">
-                            <h5>UPLOAD VIDEO</h5>
-                          </div>
-
-                          <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                            <select class="form-select border-primary" aria-label="Default select example"
-                              id="videoType">
-                              <option value="0" selected>Public Video</option>
-                              <option value="1">Private Video</option>
-                            </select>
-                          </div>
-
-                          <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                            <select class="form-select border-primary" aria-label="Default select example"
-                              id="videoUnit">
-                              <?php
-                              $getUnitData = $pdo->prepare("SELECT * FROM subjecttitle");
-                              $getUnitData->execute();
-                              $unitDataRows = $getUnitData->fetchAll(PDO::FETCH_ASSOC);
-
-                              foreach ($unitDataRows as $unitData) {
-                              ?>
-                              <option value="<?php echo $unitData['id'] ?>">
-                                <?php echo $unitData['titleName'] ?>
-                              </option>
-                              <?php
-                              }
-                              ?>
-                            </select>
-                          </div>
-
-                          <div class="input-group mb-3 mt-1">
-                            <label class="input-group-text" for="inputGroupFile01">Video Name</label>
-                            <input type="text" class="form-control" id="uploadVideoName">
-                          </div>
-
-                          <div class="input-group mb-3 mt-1">
-                            <label class="input-group-text" for="inputGroupFile01">Upload</label>
-                            <input type="file" class="form-control" id="video" accept=".mp4">
-                          </div>
-                          <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 0%">0%</div>
-                          </div>
-                        </div>
-                        <button class="theme-btn mt-2 btn-style-three" onclick="UploadVideo();">Upload Video<i
-                            class="fa fa-angle-right"></i></button>
-
-                        <div class="row mt-3">
-
-                          <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                            <select class="form-select border-primary" aria-label="Default select example"
-                              id="gotSelectedSubject" onchange="selectedUnit();">
-                              <option value="0">Select unit</option>
-                              <?php
-                              $getUnitData = $pdo->prepare("SELECT * FROM subjecttitle");
-                              $getUnitData->execute();
-                              $unitDataRows = $getUnitData->fetchAll(PDO::FETCH_ASSOC);
-                          
-                              foreach ($unitDataRows as $unitData) {
-                                ?>
-                              <option value="<?php echo $unitData['id'] ?>">
-                                <?php echo $unitData['titleName'] ?>
-                              </option>
-                              <?php
-                              }
-                              ?>
-                            </select>
-                          </div>
-
-                          <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                            <select class="form-select border-primary" aria-label="Default select example"
-                              id="loadVideoData" onchange="openVideoLink()">
-
-                            </select>
-                          </div>
-
-                          <div class="col-12 mt-1">
-                            <div class="col-12 mt-1">
-                              <video id="UnitVideoLink" class="video-js vjs-default-skin col-12" controls preload="auto"
-                                height="500" width="100%" data-setup='{
-                              }'>
-                                <source id="videoSource" src="./videos/NEELICT TV advertisements.mp4"
-                                  type="video/mp4" />
-                              </video>
-
-                            </div>
-                          </div>
-
-                          <div class="col-12 mt-2">
-                            <div class="row">
-                              <hr>
-                              <div class="col-12">
-                                <h6>Private Videos</h6>
-                              </div>
-                              <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                <select class="form-select border-primary" aria-label="Default select example"
-                                  id="loadPrivateVideoData">
-                                </select>
-                              </div>
-
-                              <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                <select class="form-select border-primary" id="loadPrivateVideoDataVithVideo">
-                                </select>
-                              </div>
-                            </div>
-                            <button class="theme-btn mt-2 btn-style-three" onclick="addPrivateVideoToBatch();">Assign
-                              Video To Batch</button>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -298,52 +187,14 @@ include_once "../connection.php";
                       <div class="content">
                         <div class="content">
                           <div class="container-fluid">
-                            <div class="row">
-
-                              <div class="col-12 mt-2">
-                                <div class="row g-3 align-items-center">
-                                  <div class="col-auto">
-                                    <label for="inputPassword6" class="col-form-label">Student Mobile</label>
-                                  </div>
-                                  <div class="col-auto">
-                                    <input type="number" class="form-control" id="studentMobile"
-                                      aria-labelledby="passwordHelpInline" oninput="getMobileSuggestions()"
-                                      list="mobileSuggestions">
-                                    <datalist id="mobileSuggestions"></datalist> <!-- Add this datalist element -->
-                                  </div>
-                                  <div class="col-auto">
-                                    <button type="button" class="btn btn-primary"
-                                      onclick="gotoStudentProfile($('#studentMobile').val());">Profile</button>
-                                  </div>
-                                </div>
-
-                              </div>
-                              <div class="title-box mt-4">
-                                <h5>Unverified Students</h5>
-                              </div>
-                              <div class="col-12 mt-3 overflow-auto ">
-                                <?php
-                                include_once "./admin.layouts/main.studentTable1.php";
-                                ?>
-                              </div>
-                              <div class="title-box mt-4">
-                                <h5>Verified Students</h5>
-                              </div>
-                              <div class="col-12 mt-3 overflow-auto">
-                                <?php
-                                include_once "./admin.layouts/main.studentTable2.php";
-                                ?>
-                              </div>
-
-                            </div>
+                            <?php
+                            include_once "./student.admin.php";
+                            ?>
                           </div>
-
                           <!-- Title Box -->
 
                           <!-- Profile Form -->
                           <div class="profile-form">
-
-
 
                           </div>
                         </div>
@@ -372,74 +223,9 @@ include_once "../connection.php";
                       <div class="content">
 
                         <div class="content">
-
-                          <div class="title-box">
-                            <h5>Ongoing Units</h5>
-                          </div>
-
-                          <div class="container-fluid">
-                            <div class="row">
-                              <div class="col-12 mt-2">
-                                <?php
-                                include_once "./admin.layouts/ongoingSubjects.table1.php";
-                                ?>
-                              </div>
-                              <div class="col-12">
-                                <div class="profile-form">
-
-                                  <!-- Profile Form -->
-                                  <div>
-                                    <div class="row clearfix">
-
-                                      <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                        <input type="text" class="border-primary" placeholder="Unit Name" required=""
-                                          id="unitName">
-                                      </div>
-                                      <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                        <select class="form-select border-primary" aria-label="Default select example"
-                                          id="unitGrade">
-                                          <option value="12" selected>Grade :- 12</option>
-                                          <option value="13">Grade :- 13</option>
-                                        </select>
-                                      </div>
-                                      <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                        <input type="text" class="border-primary" placeholder="Unit Text" required=""
-                                          id="unitText">
-                                        <button class="theme-btn btn-style-three" onclick="updateSubjectData();">Update
-                                          Unit<i class="fa fa-angle-right"></i></button>
-                                      </div>
-                                      <div class="col-12 mt-3">
-                                        <div class="row">
-                                          <div class="col-12">
-                                            <h5>Add Unit</h5>
-                                          </div>
-                                          <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                            <input type="text" class="border-primary" placeholder="Unit Name"
-                                              required="" id="AddunitName">
-                                          </div>
-                                          <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                            <select class="form-select border-primary"
-                                              aria-label="Default select example" id="AddunitGrade">
-                                              <option value="12" selected>Grade :- 12</option>
-                                              <option value="13">Grade :- 13</option>
-                                            </select>
-                                          </div>
-                                          <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                            <input type="text" class="border-primary" placeholder="Unit Text"
-                                              required="" id="AddunitText">
-                                            <button class="theme-btn btn-style-three" onclick="addNewUnit();">Add Unit<i
-                                                class="fa fa-angle-right"></i></button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
+                          <?php
+                          include_once "./subjectmanage.admin.php";
+                          ?>
                         </div>
                       </div>
                     </div>
@@ -460,7 +246,67 @@ include_once "../connection.php";
   <script>
     let subjectID;
 
-  
+    const loadVideosToBatch = () => {
+      let batchID = $("#getPrivatevideoData").val();
+
+      let formData = new FormData();
+      formData.append('batchID', batchID);
+
+      $.ajax({
+        url: './loadPrivateVideHasBatch.admin.php',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+          $('#loadBatchhasVideoData').html(response);
+        },
+        error: function(xhr, status, error) {
+          console.log(xhr.responseText);
+        }
+      });
+    };
+
+    const UnassignBatchToVideo = () => {
+      Swal.fire({
+        title: 'Comfirm  To Unassign Subject?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Save',
+        denyButtonText: `Cancel Unassign`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          confirmUnassignVideo();
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info')
+        }
+      })
+    };
+    const confirmUnassignVideo = () => {
+
+      let batchID = $('#getPrivatevideoData').val();
+      let videoID = $("#loadBatchhasVideoData").val();
+
+      let formData = new FormData();
+      formData.append('batchID', batchID);
+      formData.append('videoID', videoID);
+
+      $.ajax({
+        url: './unassignVideoFrombatch.admin.php',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+          Swal.fire(response);
+          loadVideosToBatch();
+        },
+        error: function(xhr, status, error) {
+          console.log(xhr.responseText);
+        }
+      });
+    }
+
     const addPrivateVideoToBatch = () => {
       let provateVideoId = $('#loadPrivateVideoData').val();
       let batchId = $('#loadPrivateVideoDataVithVideo').val();
@@ -475,10 +321,10 @@ include_once "../connection.php";
         data: formData,
         contentType: false,
         processData: false,
-        success: function (response) {
+        success: function(response) {
           swal.fire(response);
         },
-        error: function (xhr, status, error) {
+        error: function(xhr, status, error) {
           console.log(xhr.responseText);
         }
       });
@@ -489,12 +335,14 @@ include_once "../connection.php";
       $.ajax({
         url: './getVideoData.admin.php',
         type: 'POST',
-        data: { subjectId: selectedSubjectId },
-        success: function (response) {
+        data: {
+          subjectId: selectedSubjectId
+        },
+        success: function(response) {
           // Populate the second select tab with the fetched units
           $('#loadVideoData').html(response);
         },
-        error: function (xhr, status, error) {
+        error: function(xhr, status, error) {
           console.log(xhr.responseText);
         }
       });
@@ -503,11 +351,11 @@ include_once "../connection.php";
       $.ajax({
         url: './getPrivateVideoData.admin.php',
         type: 'POST',
-        success: function (response) {
+        success: function(response) {
           // Populate the second select tab with the fetched units
           $('#loadPrivateVideoData').html(response);
         },
-        error: function (xhr, status, error) {
+        error: function(xhr, status, error) {
           console.log(xhr.responseText);
         }
       });
@@ -516,11 +364,11 @@ include_once "../connection.php";
       $.ajax({
         url: './getPrivateVideoDataPrivate.admin.php',
         type: 'POST',
-        success: function (response) {
+        success: function(response) {
           // Populate the second select tab with the fetched units
           $('#loadPrivateVideoDataVithVideo').html(response);
         },
-        error: function (xhr, status, error) {
+        error: function(xhr, status, error) {
           console.log(xhr.responseText);
         }
       });
@@ -561,9 +409,9 @@ include_once "../connection.php";
         data: formData,
         processData: false,
         contentType: false,
-        xhr: function () {
+        xhr: function() {
           let xhr = new XMLHttpRequest();
-          xhr.upload.addEventListener('progress', function (event) {
+          xhr.upload.addEventListener('progress', function(event) {
             if (event.lengthComputable) {
               let progress = Math.round((event.loaded / event.total) * 100);
               $('.progress-bar').width(progress + '%').text(progress + '%');
@@ -571,11 +419,11 @@ include_once "../connection.php";
           });
           return xhr;
         },
-        success: function (response) {
+        success: function(response) {
           swal.fire(response);
-          window.location.reload();
+
         },
-        error: function (xhr, status, error) {
+        error: function(xhr, status, error) {
           swal.fire(xhr.responseText);
         }
       });
@@ -606,7 +454,7 @@ include_once "../connection.php";
           data: formdata,
           contentType: false,
           processData: false,
-          success: function (data) {
+          success: function(data) {
 
             if (data == 'success') {
               Swal.fire({
@@ -652,7 +500,7 @@ include_once "../connection.php";
           data: formdata,
           contentType: false,
           processData: false,
-          success: function (data) {
+          success: function(data) {
 
             if (data == 'success') {
               Swal.fire({
@@ -680,7 +528,7 @@ include_once "../connection.php";
         data: {
           subjectID: paramSubjectID
         },
-        success: function (data) {
+        success: function(data) {
           let subjectData = JSON.parse(data);
           subjectID = subjectData[0].id;
 
@@ -704,14 +552,14 @@ include_once "../connection.php";
         data: {
           studentMobile: studentMobile
         },
-        success: function (response) {
+        success: function(response) {
 
           var suggestions = JSON.parse(response);
           var suggestionsElement = document.getElementById("mobileSuggestions");
 
           suggestionsElement.innerHTML = "";
 
-          suggestions.forEach(function (suggestion) {
+          suggestions.forEach(function(suggestion) {
             var option = document.createElement("option");
             option.value = suggestion;
             suggestionsElement.appendChild(option);

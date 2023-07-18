@@ -20,8 +20,6 @@ players.ready(function () {
   });
 });
 
-
-
 function changeBorderColor(input) {
   input.style.borderColor = "blue";
 }

@@ -10,7 +10,12 @@ include_once "../connection.php";
 if ($_GET['Studentmobile'] == null) {
     header('Location: ./admin.php');
 }
+
 $StudentMobile = $_GET['Studentmobile'];
+if (strlen($StudentMobile) == 10) {
+} else {
+    header('Location: ./admin.php');
+}
 
 $stmt = $pdo->prepare("SELECT * FROM student INNER JOIN batch ON  student.batch_batchId = batch.batchId WHERE mobile = ? ");
 $stmt->execute([$StudentMobile]);
@@ -29,9 +34,9 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
     include_once "./adminComponents/header.admin.php";
     include_once "./adminComponents/responsive.admin.php";
     ?>
+    
 </head>
-
-<body class="">
+<body>
 
     <?php
     include_once "../components/preloader.component.php";

@@ -27,6 +27,7 @@ include_once "../connection.php";
   <?php
   include_once "../components/preloader.component.php";
   ?>
+
   <div class="page-wrapper">
     <header class="main-header">
       <div class="header-top">
@@ -284,6 +285,16 @@ include_once "../connection.php";
   include_once "./studentComponents/body.student.php";
   ?>
   <script>
+
+    function openVideoLink() {
+      let selectedOption = $('#loadVideoData option:selected');
+      let videoLink = selectedOption.attr('data-videoLink');
+
+      $('#videoSource').attr('src', videoLink);
+      videojs('UnitVideoLink').src(videoLink);
+      videojs('UnitVideoLink').load();
+      videojs('UnitVideoLink').play();
+    }
     $(document).ready(function() {
       $(".showPasswordBtn").click(function() {
         var target = $(this).data("target");
@@ -346,13 +357,13 @@ include_once "../connection.php";
           'Your new passwords do not match',
           'question'
         );
-      }else if (newPassword == "" || confirmPassword == "") {
+      } else if (newPassword == "" || confirmPassword == "") {
         swal.fire(
           'Password',
           'Fill the all feilds',
           'question'
         );
-      }else {
+      } else {
         const passwordData = new FormData();
         passwordData.append("newPassword", newPassword);
 

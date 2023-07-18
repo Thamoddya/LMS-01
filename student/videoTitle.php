@@ -12,10 +12,10 @@ if (count($getSubjecttitleResult) > 0) {
         <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
             <div class="inner-box">
                 <div class="image">
-                    <a href="course-detail.html?titleID=<?php echo $row['id'] ?>"><img src="../assets/images/resource/YT thumbmail.jpg" alt=""></a>
+                    <a href="unitVideos.student.php?titleID=<?php echo $row['id'] ?>"><img src="../assets/images/resource/YT thumbmail.jpg" alt=""></a>
                 </div>
                 <div class="lower-content">
-                    <h5><a href="course-detail.html?titleID=<?php echo $row['id'] ?>"><?php echo $row['titleName'] ?></a></h5>
+                    <h5><a href="unitVideos.student.php?titleID=<?php echo $row['id'] ?>"><?php echo $row['titleName'] ?></a></h5>
                     <div class="text"><?php echo $row['subjectText'] ?>.</div>
                     <div class="clearfix">
                         <div class="pull-left">
