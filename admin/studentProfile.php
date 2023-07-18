@@ -264,7 +264,7 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
                     formData.append('mobile', studentMobile);
 
                     $.ajax({
-                        url: './approveStudent.admin.php',
+                        url: './deleteStudent.admin.php',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -276,7 +276,7 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
                                     'Student Deleted successfully',
                                     'success'
                                 );
-                                window.location.reload();
+                                window.location.href='./admin.php';
                             } else {
                                 swal.fire(
                                     'Error',

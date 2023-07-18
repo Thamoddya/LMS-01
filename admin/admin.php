@@ -134,7 +134,6 @@ include_once "../connection.php";
 
                         <div class="row clearfix">
 
-
                         </div>
 
                       </div>
@@ -143,6 +142,50 @@ include_once "../connection.php";
                       <div class="content">
 
                         <div class="row clearfix">
+                          <div class="col-12 mt-1">
+                            <div class="row">
+                              <div class="col-12 mt-1">
+                                <h4>Register a Batch</h4>
+                              </div>
+                              <div class="col-12 mt-2">
+                                <div class="input-group ">
+                                  <span class="input-group-text" id="basic-addon1">Batch Name</span>
+                                  <input type="text" id="getBatchName" class="form-control" placeholder="batch Name" aria-label="batch Name"
+                                    aria-describedby="basic-addon1">
+                                </div>
+                              </div>
+                              <div class="col-12 mt-2">
+                                <select class="form-select" id="getbatchGrade" >
+                                  <option selected value="12">Greade 12</option>
+                                  <option selected value="13">Greade 13</option>
+                                </select>
+                              </div>
+                              
+
+                              <div class="col-12 mt-2">
+                                <select class="form-select" id="getbatchCityId">
+                                  <option selected value="null">Select City For Batch</option>
+                                  <?php
+                                $getCityData = $pdo->prepare('SELECT * FROM city');
+                                $getCityData->execute();
+                                while ($CityData = $getCityData->fetch(PDO::FETCH_ASSOC)) {
+                                ?>
+                                  <option value="<?php echo $CityData['cityId']; ?> ">
+                                    <?php echo $CityData['cityName']; ?>
+                                  </option>
+                                  <?php
+                                }
+                                ?>
+                                </select>
+                              </div>
+                              <div class="col-12 mt-2">
+                                <button class="btn btn-primary" onclick="addNewBatch();">ADD BATCH</button>
+                              </div>
+                              
+
+                            </div>
+                          </div>
+
                           <div class="col-12 mt-1">
                             <h4>Registed Batch</h4>
                           </div>
@@ -156,7 +199,9 @@ include_once "../connection.php";
                                 $getBatchData->execute();
                                 while ($rowOfBatchData = $getBatchData->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
-                                  <option value="<?php echo $rowOfBatchData['batchId']; ?>"><?php echo $rowOfBatchData['batchName']; ?></option>
+                                <option value="<?php echo $rowOfBatchData['batchId']; ?>">
+                                  <?php echo $rowOfBatchData['batchName']; ?>
+                                </option>
                                 <?php
                                 }
                                 ?>
@@ -246,6 +291,16 @@ include_once "../connection.php";
   <script>
     let subjectID;
 
+    const addNewBatch = ()=>{
+      let name = $('#getBatchName').val();
+      let city = $('#getbatchCityId').val();
+      let grade = $('#getbatchGrade').val();
+
+      alert(name);
+      alert(city);
+      alert(grade);
+    }
+
     const loadVideosToBatch = () => {
       let batchID = $("#getPrivatevideoData").val();
 
@@ -258,10 +313,10 @@ include_once "../connection.php";
         data: formData,
         contentType: false,
         processData: false,
-        success: function(response) {
+        success: function (response) {
           $('#loadBatchhasVideoData').html(response);
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
           console.log(xhr.responseText);
         }
       });
@@ -297,11 +352,11 @@ include_once "../connection.php";
         data: formData,
         contentType: false,
         processData: false,
-        success: function(response) {
+        success: function (response) {
           Swal.fire(response);
           loadVideosToBatch();
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
           console.log(xhr.responseText);
         }
       });
@@ -321,11 +376,11 @@ include_once "../connection.php";
         data: formData,
         contentType: false,
         processData: false,
-        success: function(response) {
+        success: function (response) {
           swal.fire(response);
           loadVideosToBatch();
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
           console.log(xhr.responseText);
         }
       });
@@ -339,11 +394,11 @@ include_once "../connection.php";
         data: {
           subjectId: selectedSubjectId
         },
-        success: function(response) {
+        success: function (response) {
           // Populate the second select tab with the fetched units
           $('#loadVideoData').html(response);
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
           console.log(xhr.responseText);
         }
       });
@@ -352,11 +407,11 @@ include_once "../connection.php";
       $.ajax({
         url: './getPrivateVideoData.admin.php',
         type: 'POST',
-        success: function(response) {
+        success: function (response) {
           // Populate the second select tab with the fetched units
           $('#loadPrivateVideoData').html(response);
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
           console.log(xhr.responseText);
         }
       });
@@ -365,11 +420,11 @@ include_once "../connection.php";
       $.ajax({
         url: './getPrivateVideoDataPrivate.admin.php',
         type: 'POST',
-        success: function(response) {
+        success: function (response) {
           // Populate the second select tab with the fetched units
           $('#loadPrivateVideoDataVithVideo').html(response);
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
           console.log(xhr.responseText);
         }
       });
@@ -410,9 +465,9 @@ include_once "../connection.php";
         data: formData,
         processData: false,
         contentType: false,
-        xhr: function() {
+        xhr: function () {
           let xhr = new XMLHttpRequest();
-          xhr.upload.addEventListener('progress', function(event) {
+          xhr.upload.addEventListener('progress', function (event) {
             if (event.lengthComputable) {
               let progress = Math.round((event.loaded / event.total) * 100);
               $('.progress-bar').width(progress + '%').text(progress + '%');
@@ -420,11 +475,11 @@ include_once "../connection.php";
           });
           return xhr;
         },
-        success: function(response) {
+        success: function (response) {
           swal.fire(response);
 
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
           swal.fire(xhr.responseText);
         }
       });
@@ -455,7 +510,7 @@ include_once "../connection.php";
           data: formdata,
           contentType: false,
           processData: false,
-          success: function(data) {
+          success: function (data) {
 
             if (data == 'success') {
               Swal.fire({
@@ -501,7 +556,7 @@ include_once "../connection.php";
           data: formdata,
           contentType: false,
           processData: false,
-          success: function(data) {
+          success: function (data) {
 
             if (data == 'success') {
               Swal.fire({
@@ -529,7 +584,7 @@ include_once "../connection.php";
         data: {
           subjectID: paramSubjectID
         },
-        success: function(data) {
+        success: function (data) {
           let subjectData = JSON.parse(data);
           subjectID = subjectData[0].id;
 
@@ -553,14 +608,14 @@ include_once "../connection.php";
         data: {
           studentMobile: studentMobile
         },
-        success: function(response) {
+        success: function (response) {
 
           var suggestions = JSON.parse(response);
           var suggestionsElement = document.getElementById("mobileSuggestions");
 
           suggestionsElement.innerHTML = "";
 
-          suggestions.forEach(function(suggestion) {
+          suggestions.forEach(function (suggestion) {
             var option = document.createElement("option");
             option.value = suggestion;
             suggestionsElement.appendChild(option);
