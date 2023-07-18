@@ -269,7 +269,7 @@ include_once "../connection.php";
 
     const UnassignBatchToVideo = () => {
       Swal.fire({
-        title: 'Comfirm  To Unassign Subject?',
+        title: 'Comfirm  To Unassign Video?',
         showDenyButton: true,
         showCancelButton: false,
         confirmButtonText: 'Save',
@@ -323,6 +323,7 @@ include_once "../connection.php";
         processData: false,
         success: function(response) {
           swal.fire(response);
+          loadVideosToBatch();
         },
         error: function(xhr, status, error) {
           console.log(xhr.responseText);

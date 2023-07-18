@@ -12,6 +12,7 @@ if ($_GET['Studentmobile'] == null) {
 }
 
 $StudentMobile = $_GET['Studentmobile'];
+
 if (strlen($StudentMobile) == 10) {
 } else {
     header('Location: ./admin.php');
@@ -34,8 +35,9 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
     include_once "./adminComponents/header.admin.php";
     include_once "./adminComponents/responsive.admin.php";
     ?>
-    
+
 </head>
+
 <body>
 
     <?php
@@ -116,6 +118,9 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
                                     echo "Student Approved";
                                 }
                                 ?>
+                            </div>
+                            <div class="text text-primary">
+                                <button class="btn btn-danger" onclick="deleteStudentAccount();">Delete Student Account</button>
                             </div>
                         </div>
                     </div>
@@ -243,6 +248,51 @@ $student = $stmt->fetch(PDO::FETCH_ASSOC);
     ?>
 
     <script>
+        const deleteStudentAccount = () => {
+            Swal.fire({
+                title: 'Comfirm  To Delete Student Account?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Save',
+                denyButtonText: `Cancel Delete`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    let studentMobile = "<?php echo  $StudentMobile ?>";
+
+                    var formData = new FormData();
+                    formData.append('mobile', studentMobile);
+
+                    $.ajax({
+                        url: './approveStudent.admin.php',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            if (response == 'success') {
+                                swal.fire(
+                                    'Success',
+                                    'Student Deleted successfully',
+                                    'success'
+                                );
+                                window.location.reload();
+                            } else {
+                                swal.fire(
+                                    'Error',
+                                    'Something went wrong',
+                                    'error'
+                                );
+                            }
+                        }
+                    });
+
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            })
+        }
+
         const approveStudent = () => {
             let Mobile = "<?php echo $student['mobile'] ?>";
 
