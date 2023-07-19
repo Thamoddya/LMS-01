@@ -124,7 +124,6 @@ include_once "../connection.php";
                         include_once "./overview.admin.php";
                         ?>
 
-
                       </div>
                     </div>
 
@@ -133,7 +132,19 @@ include_once "../connection.php";
                       <div class="content">
 
                         <div class="row clearfix">
-
+                          <div class="col-12">
+                            <h6>Select Month</h6>
+                            <select class="form-select" id="getbatchGrade">
+                              <option selected value="12">January</option>
+                              <option  value="12">February</option>
+                              <option  value="12">March</option>
+                            </select>
+                            <div class="input-group mb-1 mt-2">
+                              <span class="input-group-text" id="basic-addon1">Student Mobile</span>
+                              <input type="text" class="form-control" placeholder="Student Mobile"
+                                aria-describedby="basic-addon1">
+                            </div>
+                          </div>
                         </div>
 
                       </div>
@@ -258,6 +269,7 @@ include_once "../connection.php";
                                   ?>
                                 </select>
                               </div>
+                              
                               <div class="col-12 mt-2">
                                 <button class="btn btn-success" onclick="turnOnBatch();">Turn On</button>
                               </div>
@@ -785,6 +797,7 @@ include_once "../connection.php";
         });
       }
     };
+
 
     const loadSubjectData = (paramSubjectID) => {
       $.ajax({

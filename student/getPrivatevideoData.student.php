@@ -16,6 +16,7 @@
     } else {
         foreach ($PublicVideoData as $data) {
             echo '<button class="my-1 bg-primary p-3 text-center fw-bold text-white" id="loadVideoData" onclick="openVideoLink(this);" data-videoLink="../admin/' . $data['videoLink'] . '">' . $data['videoName'] . '</button>';
+            // echo '<button class="my-1 bg-primary p-3 text-center fw-bold text-white" id="loadVideoData" onclick="openVideoLink(this);" data-videoLink="../admin/' . $data['videoLink'] . '">' . $data['videoName'] . '</button>';
         }
     }
     ?>

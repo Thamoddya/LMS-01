@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,6 +14,39 @@
     include_once "./components/head.component.php";
     ?>
 
+    <script>
+        fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCkDYw6iaXB6a3gtufF64FBA&maxResults=12&order=date&key=AIzaSyAUedamQr3s_XEM5Iv_OuRe-faOPM-_XRs")
+            .then((result) => {
+                return result.json()
+            }).then((data) => {
+                let videos = data.items
+                let videoContainer = document.querySelector(".youtube-container")
+                for (video of videos) {
+                    videoContainer.innerHTML +=
+                        `
+            <div class="cource-block-two col-lg-4 col-md-6 col-sm-12 ">
+                                    <div class="inner-box">
+                                        <div class="image">
+                                            <a href="${video.snippet.thumbnails.high.url}"><img src="${video.snippet.thumbnails.high.url}" alt="" /></a>
+                                        </div>
+                             <div class="lower-content">
+                                <h5><a href="https://www.youtube.com/watch?v=${video.id.videoId}">${video.snippet.title}</a></h5>
+                            <div class="text">${video.snippet.description}.</div>
+                           <div class="clearfix">
+                                 <div class="pull-left">
+                                     <div class="students">${video.snippet.channelTitle}</div>
+                                </div>
+                            <div class="pull-right">
+                        <div class="hours">Neel Prasanna</div>
+                       </div>
+                    </div>
+                  </div>
+                 </div>
+              </div>
+            `
+                }
+            })
+    </script>
 </head>
 
 <body>
@@ -95,16 +128,16 @@
                     <!-- Content Side -->
                     <div class="content-side col-lg-9 col-md-12 col-sm-12">
                         <div class="our-courses">
-                            <div class="row clearfix">
+                            <div class="row clearfix youtube-container">
 
-                                <!-- Cource Block Two -->
-                                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
+                                <!-- Cource Block Two
+                                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12 ">
                                     <div class="inner-box">
                                         <div class="image">
-                                            <a href="https://www.youtube.com/watch?v=MeCySNaFKME"><img src="./assets/images/resource/YT thumbmail.jpg" alt="" /></a>
+                                            <a href=""><img src="" alt="" /></a>
                                         </div>
                                         <div class="lower-content">
-                                            <h5><a href="https://www.youtube.com/watch?v=MeCySNaFKME">Dp Education last moment</a></h5>
+                                            <h5><a href="">Dp Education last moment</a></h5>
                                             <div class="text">Neel ICT for Advance level students.</div>
                                             <div class="clearfix">
                                                 <div class="pull-left">
@@ -116,102 +149,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                                    <div class="inner-box">
-                                        <div class="image">
-                                            <a href="https://www.youtube.com/watch?v=MeCySNaFKME"><img src="./assets/images/resource/YT thumbmail.jpg" alt="" /></a>
-                                        </div>
-                                        <div class="lower-content">
-                                            <h5><a href="https://www.youtube.com/watch?v=MeCySNaFKME">Dp Education last moment</a></h5>
-                                            <div class="text">Neel ICT for Advance level students.</div>
-                                            <div class="clearfix">
-                                                <div class="pull-left">
-                                                    <div class="students">Neel Prasanna</div>
-                                                </div>
-                                                <div class="pull-right">
-                                                    <div class="hours">5 Mins</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                                    <div class="inner-box">
-                                        <div class="image">
-                                            <a href="https://www.youtube.com/watch?v=MeCySNaFKME"><img src="./assets/images/resource/YT thumbmail.jpg" alt="" /></a>
-                                        </div>
-                                        <div class="lower-content">
-                                            <h5><a href="https://www.youtube.com/watch?v=MeCySNaFKME">Dp Education last moment</a></h5>
-                                            <div class="text">Neel ICT for Advance level students.</div>
-                                            <div class="clearfix">
-                                                <div class="pull-left">
-                                                    <div class="students">Neel Prasanna</div>
-                                                </div>
-                                                <div class="pull-right">
-                                                    <div class="hours">5 Mins</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                                    <div class="inner-box">
-                                        <div class="image">
-                                            <a href="https://www.youtube.com/watch?v=MeCySNaFKME"><img src="./assets/images/resource/YT thumbmail.jpg" alt="" /></a>
-                                        </div>
-                                        <div class="lower-content">
-                                            <h5><a href="https://www.youtube.com/watch?v=MeCySNaFKME">Dp Education last moment</a></h5>
-                                            <div class="text">Neel ICT for Advance level students.</div>
-                                            <div class="clearfix">
-                                                <div class="pull-left">
-                                                    <div class="students">Neel Prasanna</div>
-                                                </div>
-                                                <div class="pull-right">
-                                                    <div class="hours">5 Mins</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                                    <div class="inner-box">
-                                        <div class="image">
-                                            <a href="https://www.youtube.com/watch?v=MeCySNaFKME"><img src="./assets/images/resource/YT thumbmail.jpg" alt="" /></a>
-                                        </div>
-                                        <div class="lower-content">
-                                            <h5><a href="https://www.youtube.com/watch?v=MeCySNaFKME">Dp Education last moment</a></h5>
-                                            <div class="text">Neel ICT for Advance level students.</div>
-                                            <div class="clearfix">
-                                                <div class="pull-left">
-                                                    <div class="students">Neel Prasanna</div>
-                                                </div>
-                                                <div class="pull-right">
-                                                    <div class="hours">5 Mins</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cource-block-two col-lg-4 col-md-6 col-sm-12">
-                                    <div class="inner-box">
-                                        <div class="image">
-                                            <a href="https://www.youtube.com/watch?v=MeCySNaFKME"><img src="./assets/images/resource/YT thumbmail.jpg" alt="" /></a>
-                                        </div>
-                                        <div class="lower-content">
-                                            <h5><a href="https://www.youtube.com/watch?v=MeCySNaFKME">Dp Education last moment</a></h5>
-                                            <div class="text">Neel ICT for Advance level students.</div>
-                                            <div class="clearfix">
-                                                <div class="pull-left">
-                                                    <div class="students">Neel Prasanna</div>
-                                                </div>
-                                                <div class="pull-right">
-                                                    <div class="hours">5 Mins</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div> -->
+
                             </div>
                         </div>
                     </div>

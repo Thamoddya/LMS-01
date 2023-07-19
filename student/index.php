@@ -69,7 +69,7 @@ include_once "../connection.php";
             <div class="top-right pull-right clearfix">
               <!-- Login Nav -->
               <ul class="login-nav">
-                <li><a href="#">Logout</a></li>
+                <li><a href="./logout.student.php">Logout</a></li>
                 <li><a href="#">Profile</a></li>
                 <li><a href="#">Youtube</a></li>
               </ul>
@@ -183,29 +183,54 @@ include_once "../connection.php";
                             $getLastMonthpayment->execute([$previousMonth, $student['id'], $currentYear]);
                             if ($getLastMonthpayment->rowCount() > 0) {
                               include_once "./videoTitle.php";
-                            }else{
-                              echo ' <div class="alert alert-danger" role="alert"> Pay Your Class Fee For Month - '.$previousMonth.' & ' . $currentMonthName . ' To unlock The Video Area.If There Any Error , Please Contact Admin.</div>';
+                            } else {
+                              echo ' <div class="alert alert-danger" role="alert"> Pay Your Class Fee For Month - ' . $previousMonth . ' & ' . $currentMonthName . ' To unlock The Video Area.If There Any Error , Please Contact Admin.</div>';
                             }
                           }
                           ?>
-
                         </div>
-
                       </div>
                     </div>
-
                     <!-- Tab -->
-
                     <!-- Tab -->
                     <div class="tab" id="prod-billing">
                       <div class="content">
 
                         <div class="row clearfix">
-                          <div class="col-12">
-                            
-                          </div>
+                          
+                            <?php
+                            $getInvoicesQuery = $pdo->prepare("SELECT * FROM invoice INNER JOIN `year` ON `year`.id = invoice.year_id INNER JOIN `month` ON `month`.id = invoice.month_id WHERE student_id = ? ORDER BY invoice.id DESC");
+                            $getInvoicesQuery->execute([$student['id']]);
+                            $invoicesData = $getInvoicesQuery->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($invoicesData as $invoices) {
+                            ?>
+                              <div class="col-12 col-sm-3 col-lg-3 bg-white rounded-5 m-sm-1 mt-3 mt-md-0">
+                                <div class="row">
+                                  <div class="col-12 text-start bg-light-subtle">
+                                    <h6 class="m-2 text-center"> ɪꜱꜱᴜᴇᴅ ᴅᴀᴛᴇ : <?php echo date("F j, Y", strtotime($invoices["payedDate"])); ?></h6>
+                                  </div>
+                                  <div class="col-12 text-start" style="background-color: #eff1f3;">
+                                    <h6 class="m-2"><i class="fa fa-user"></i> ᴍᴏɴᴛʜ: <?php echo $invoices["monthName"]; ?></h6>
+                                  </div>
+                                  <div class="col-12 text-start" style="background-color: #eaeaea;">
+                                    <h6 class="m-2"><i class="fa fa-atom"></i> ʏᴇᴀʀ : <?php echo $invoices["yearName"]; ?></h6>
+                                  </div>
+                                  <div class="col-12 text-start" style="background-color: #e5e6e4;">
+                                    <h6 class="m-2"><i class="fa fa-clock"></i> ʙᴀᴛᴄʜ ɴᴀᴍᴇ: <?php echo $student['batchName'] ?></h6>
+                                  </div>
+                                  <div class="col-12 text-start" style="background-color: #cfd2cd;">
+                                    <h6 class="m-2"><i class="fa fa-earth"></i> ᴘʀɪᴄᴇ: <?php echo $invoices["price"]; ?>.00</h6>
+                                  </div>
+                                  <div class="col-12 text-start" style="background-color: #1d3557; height: 50px;">
+                                    <h6 class="m-2 text-white"><i class="fa fa-earth"></i> ɪᴅ : #<?php echo $invoices["invoiceId"]; ?></h6>
+                                  </div>
+                                </div>
+                              </div>
+                            <?php
+                            }
+                            ?>
+                          
                         </div>
-
                       </div>
                     </div>
 
