@@ -27,9 +27,13 @@
   </select>
 </div>
 
-<div class="input-group mb-3 mt-1">
+<div class="input-group mb-2 mt-1">
   <label class="input-group-text" for="inputGroupFile01">Video Name</label>
   <input type="text" class="form-control" id="uploadVideoName">
+</div>
+<div class="input-group mb-3 ">
+  <label class="input-group-text" for="inputGroupFile01">Video Link</label>
+  <input type="text" class="form-control" id="uploadVideoYtLink">
 </div>
 
 <div class="input-group mb-3 mt-1">
@@ -41,6 +45,7 @@
 </div>
 </div>
 <button class="theme-btn mt-2 btn-style-three" onclick="UploadVideo();">Upload Video<i class="fa fa-angle-right"></i></button>
+<button class="theme-btn mt-2 btn-style-three" onclick="uploadVdieoLink();">Upload Youtube Link<i class="fa fa-angle-right"></i></button>
 
 <div class="row mt-3">
 
@@ -78,6 +83,19 @@
 
     </div>
   </div>
+
+
+  <div class="col-12 mt-1">
+  <div class="col-12 mt-1">
+    <div class="auto-container">
+      <!-- Use the videoTYLink directly in the iframe src attribute -->
+      <iframe id="ytVideoFrame" width="640" height="360" src="https://www.youtube.com/embed/kK0AHd9N7dk" frameborder="0" allowfullscreen></iframe>
+      <h4>Watch Intro Video</h4>
+    </div>
+  </div>
+</div>
+
+
 
   <div class="col-12 mt-2">
     <div class="row">

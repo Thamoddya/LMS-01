@@ -31,26 +31,6 @@ if ($_GET['titleID'] == null) {
     include_once "./studentComponents/header.student.php";
     include_once "./studentComponents/responsive.student.php";
     ?>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        // YouTube API callback function
-        function onYouTubeIframeAPIReady() {
-            // Create YouTube player
-            var player = new YT.Player('player', {
-                height: '500',
-                width: '100%',
-                videoId: 'https://www.youtube.com/embed/UfWASUeQRek',
-                playerVars: {
-                    controls: 0, // Disable player controls
-                    disablekb: 1, // Disable keyboard controls
-                    rel: 0, // Disable related videos at the end
-                    showinfo: 0, // Hide video information
-                    modestbranding: 1 // Remove YouTube logo
-                }
-            });
-        }
-    </script>
-
 
     <style>
         #dropArea {
@@ -115,7 +95,7 @@ if ($_GET['titleID'] == null) {
 
             <div class="col-12 col-md-4 mt-5">
                 <div class="row">
-                    <!-- <div class="col-12">
+                    <div class="col-12">
                         <div class="row" id="publicVideo">
 
                         </div>
@@ -124,14 +104,20 @@ if ($_GET['titleID'] == null) {
                         <div class="row" id="privateVideo">
 
                         </div>
-                    </div> -->
+                    </div>
                 </div>
 
             </div>
 
             <div class="col-12 col-md-8">
-                <div id="player"></div>
+                <video id="UnitVideoLink" class="video-js vjs-default-skin col-12" controls preload="auto" height="500" width="100%" data-setup='{
+                              }'>
+                    <source id="videoSource" src="../admin/videos/NEELICT TV advertisements.mp4" type="video/mp4" />
+                </video>
 
+                <div id="dropArea">
+                    <p>Drag and drop a PDF file here.</p>
+                </div>
             </div>
             <div class="col-12 col-md-4 ">
 
@@ -145,148 +131,141 @@ if ($_GET['titleID'] == null) {
     include_once "./studentComponents/body.student.php";
     ?>
     <script>
-        function loadYouTubeIframeAPI() {
-            var tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/iframe_api";
-            var firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.worker.min.js';
+
+        // Function to handle dropped files
+        function handleFileDrop(event) {
+            event.preventDefault();
+            var files = event.dataTransfer.files;
+            if (files.length > 0) {
+                var file = files[0];
+                if (file.type === 'application/pdf') {
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        var pdfData = new Uint8Array(event.target.result);
+                        renderPdfInNewTab(pdfData);
+                    };
+                    reader.readAsArrayBuffer(file);
+                } else {
+                    alert('Please drop a valid PDF file.');
+                }
+            }
         }
 
-        // Load YouTube API asynchronously
-        window.onload = loadYouTubeIframeAPI;
+        // Function to render PDF in new window or tab
+        function renderPdfInNewTab(pdfData) {
+            var blob = new Blob([pdfData], {
+                type: 'application/pdf'
+            });
+            var url = URL.createObjectURL(blob);
+            window.open(url, '_blank');
+        }
 
-        // // Function to handle dropped files
-        // function handleFileDrop(event) {
-        //     event.preventDefault();
-        //     var files = event.dataTransfer.files;
-        //     if (files.length > 0) {
-        //         var file = files[0];
-        //         if (file.type === 'application/pdf') {
-        //             var reader = new FileReader();
-        //             reader.onload = function(event) {
-        //                 var pdfData = new Uint8Array(event.target.result);
-        //                 renderPdfInNewTab(pdfData);
-        //             };
-        //             reader.readAsArrayBuffer(file);
-        //         } else {
-        //             alert('Please drop a valid PDF file.');
-        //         }
-        //     }
-        // }
+        // Event listener for drag over
+        document.addEventListener('dragover', function(event) {
+            event.preventDefault();
+        });
 
-        // // Function to render PDF in new window or tab
-        // function renderPdfInNewTab(pdfData) {
-        //     var blob = new Blob([pdfData], {
-        //         type: 'application/pdf'
-        //     });
-        //     var url = URL.createObjectURL(blob);
-        //     window.open(url, '_blank');
-        // }
+        // Event listener for drop
+        document.addEventListener('drop', handleFileDrop);
 
-        // // Event listener for drag over
-        // document.addEventListener('dragover', function(event) {
-        //     event.preventDefault();
-        // });
-
-        // // Event listener for drop
-        // document.addEventListener('drop', handleFileDrop);
-
-        // // Event listener for click (fallback for older browsers)
-        // document.getElementById('dropArea').addEventListener('click', function() {
-        //     var fileInput = document.createElement('input');
-        //     fileInput.type = 'file';
-        //     fileInput.accept = 'application/pdf';
-        //     fileInput.onchange = function(event) {
-        //         var file = event.target.files[0];
-        //         if (file.type === 'application/pdf') {
-        //             var reader = new FileReader();
-        //             reader.onload = function(event) {
-        //                 var pdfData = new Uint8Array(event.target.result);
-        //                 renderPdfInNewTab(pdfData);
-        //             };
-        //             reader.readAsArrayBuffer(file);
-        //         } else {
-        //             alert('Please choose a valid PDF file.');
-        //         }
-        //     };
-        //     fileInput.click();
-        // });
+        // Event listener for click (fallback for older browsers)
+        document.getElementById('dropArea').addEventListener('click', function() {
+            var fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'application/pdf';
+            fileInput.onchange = function(event) {
+                var file = event.target.files[0];
+                if (file.type === 'application/pdf') {
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        var pdfData = new Uint8Array(event.target.result);
+                        renderPdfInNewTab(pdfData);
+                    };
+                    reader.readAsArrayBuffer(file);
+                } else {
+                    alert('Please choose a valid PDF file.');
+                }
+            };
+            fileInput.click();
+        });
 
 
-        // function handleVisibilityChange() {
-        //     if (document.hidden && !videoPlayer.paused()) {
+        function handleVisibilityChange() {
+            if (document.hidden && !videoPlayer.paused()) {
 
-        //         window.location.reload();
-        //     }
-        // }
+                window.location.reload();
+            }
+        }
 
-        // var videoPlayer = videojs('UnitVideoLink');
-
-        // videoPlayer.on('play', function() {
-
-        //     document.addEventListener('visibilitychange', handleVisibilityChange);
-        // });
+        var videoPlayer = videojs('UnitVideoLink');
 
 
-        // window.addEventListener('focus', function() {
+        videoPlayer.on('play', function() {
 
-        //     document.removeEventListener('visibilitychange', handleVisibilityChange);
-        // });
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+        });
+
+
+        window.addEventListener('focus', function() {
+
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        });
 
 
 
 
-        // function openVideoLink(button) {
-        //     let videoLink = button.getAttribute('data-videoLink');
+        function openVideoLink(button) {
+            let videoLink = button.getAttribute('data-videoLink');
 
-        //     $('#videoSource').attr('src', videoLink);
-        //     // videojs('UnitVideoLink').src(videoLink);
-        //     // videojs('UnitVideoLink').load();
-        //     // videojs('UnitVideoLink').play();
-        // }
+            $('#videoSource').attr('src', videoLink);
+            videojs('UnitVideoLink').src(videoLink);
+            videojs('UnitVideoLink').load();
+            videojs('UnitVideoLink').play();
+        }
 
 
-        // const loadPublicVideo = () => {
-        //     let formdata = new FormData();
-        //     formdata.append('titleID', '<?php echo $titleID; ?>');
+        const loadPublicVideo = () => {
+            let formdata = new FormData();
+            formdata.append('titleID', '<?php echo $titleID; ?>');
 
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: 'getPublicVideoDetails.student.php',
-        //         data: formdata,
-        //         contentType: false,
-        //         processData: false,
-        //         success: function(response) {
-        //             if (response === 'error') {
-        //                 console.log('Error occurred');
-        //             } else {
-        //                 $('#publicVideo').html(response);
-        //             }
-        //         },
-        //     });
-        // };
-        // const loadPrivateVideo = () => {
-        //     let formdata = new FormData();
-        //     formdata.append('titleID', '<?php echo $titleID; ?>');
-        //     formdata.append('batchID', '<?php echo $student['batch_batchId']; ?>');
+            $.ajax({
+                type: 'POST',
+                url: 'getPublicVideoDetails.student.php',
+                data: formdata,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response === 'error') {
+                        console.log('Error occurred');
+                    } else {
+                        $('#publicVideo').html(response);
+                    }
+                },
+            });
+        };
+        const loadPrivateVideo = () => {
+            let formdata = new FormData();
+            formdata.append('titleID', '<?php echo $titleID; ?>');
+            formdata.append('batchID', '<?php echo $student['batch_batchId']; ?>');
 
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: 'getPrivatevideoData.student.php',
-        //         data: formdata,
-        //         contentType: false,
-        //         processData: false,
-        //         success: function(response) {
-        //             if (response === 'error') {
-        //                 console.log('Error occurred');
-        //             } else {
-        //                 $('#privateVideo').html(response);
-        //             }
-        //         },
-        //     });
-        // };
-        // loadPrivateVideo();
-        // loadPublicVideo();
+            $.ajax({
+                type: 'POST',
+                url: 'getPrivatevideoData.student.php',
+                data: formdata,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response === 'error') {
+                        console.log('Error occurred');
+                    } else {
+                        $('#privateVideo').html(response);
+                    }
+                },
+            });
+        };
+        loadPrivateVideo();
+        loadPublicVideo();
     </script>
 </body>
 

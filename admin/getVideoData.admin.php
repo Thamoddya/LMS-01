@@ -14,9 +14,9 @@ $options .= '<option>Select Video </option>';
 foreach ($videoDataRows as $videoData) {
 
     if($videoData['private'] =='1'){
-        $options .= '<option class="bg-info" value="' . $videoData['publicVideoId'] . '" data-videoLink="' . $videoData['videoLink'] . '">' . $videoData['videoName'] . '</option>';
+        $options .= '<option class="bg-info" value="' . $videoData['publicVideoId'] . '" data-videoLink="' . $videoData['videoLink'] . '" data-videoYtLink = "'.$videoData['ytLink'].'">' . $videoData['videoName'] . '</option>';
     }else{
-        $options .= '<option  value="' . $videoData['publicVideoId'] . '" data-videoLink="' . $videoData['videoLink'] . '">' . $videoData['videoName'] . '</option>';
+        $options .= '<option  value="' . $videoData['publicVideoId'] . '" data-videoLink="' . $videoData['videoLink'] . '" data-videoYtLink = "'.$videoData['ytLink'].'">' . $videoData['videoName'] . '</option>';
     }
 }
 echo $options;
