@@ -4126,7 +4126,7 @@
         };
     }
 
-    ;
+
     /*!
      * jQuery UI Keycode 1.12.1
      * http://jqueryui.com

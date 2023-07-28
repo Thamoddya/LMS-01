@@ -16,9 +16,9 @@ session_start();
 </head>
 
 <body>
-    <?php
-    include_once "./components/preloader.component.php";
-    ?>
+   <!-- --><?php
+/*    include_once "./components/preloader.component.php";
+    */?>
     <div class="page-wrapper">
         <!-- Preloader -->
         <!-- Main Header-->

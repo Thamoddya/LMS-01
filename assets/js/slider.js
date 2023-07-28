@@ -15,7 +15,7 @@ const $$ = str => document.querySelectorAll(str);
                 }
                 return el;
             }
-            return;
+
         },
         reorder: function () {
             let childcnt = $("#carousel").children.length;
