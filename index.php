@@ -14,7 +14,6 @@ session_start();
     ?>
 
 </head>
-
 <body>
    <!-- --><?php
 /*    include_once "./components/preloader.component.php";
@@ -71,7 +70,6 @@ session_start();
                     <?php
                     include_once "./layout/index/course.layout.php";
                     ?>
-
                 </div>
             </div>
         </section>
@@ -115,7 +113,6 @@ session_start();
                                 <h2> events</h2>
                             </div>
                         </div>
-
                         <!-- Blocks Outer -->
                         <?php
                         include_once "./layout/index/event-block.layout.php";
@@ -123,7 +120,6 @@ session_start();
                     </div>
                 </div>
             </div>
-
         </section>
 
         <!-- News Section -->

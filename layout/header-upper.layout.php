@@ -17,7 +17,6 @@
                     <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
                         <ul class="navigation clearfix">
                             <li class="current dropdown"><a href="index.php">Home</a></li>
-
                             <li class="dropdown"><a href="./course.php">Courses</a>
                                 <ul>
                                     <li><a href="./course.php">Youtube Courses</a></li>

@@ -12,8 +12,8 @@ include_once "../connection.php";
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NEEL ICT | ADMIN</title>
 
     <?php
@@ -24,183 +24,199 @@ include_once "../connection.php";
 
 <body class="">
 
-<?php
+    <?php
 include_once "../components/preloader.component.php";
 ?>
-<div class="page-wrapper">
-    <header class="main-header">
-        <div class="header-top">
-            <div class="auto-container">
-                <div class="clearfix">
-                    <!-- Top Left -->
-                    <div class="top-left pull-left clearfix">
-                        <!-- Info List -->
-                        <ul class="info-list">
-                            <li>
-                                <span>Name :-</span><a href="#">
-                                    <?php echo $admin['adminName'] ?>
-                                </a>
-                            </li>
-                            <li>
-                                <span>Email :- </span><a href="#">
-                                    <?php echo $admin['adminEmail']; ?>
-                                </a>
-                            </li>
-                            <li>
-                                <span>Mobile :- </span><a href="#">
-                                    <?php echo $admin['adminMobile']; ?>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Top Right -->
-                    <div class="top-right pull-right clearfix">
-                        <!-- Login Nav -->
-                        <ul class="login-nav">
-                            <li><a href="#">Logout</a></li>
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Youtube</a></li>
-                        </ul>
+    <div class="page-wrapper">
+        <header class="main-header">
+            <div class="header-top">
+                <div class="auto-container">
+                    <div class="clearfix">
+                        <!-- Top Left -->
+                        <div class="top-left pull-left clearfix">
+                            <!-- Info List -->
+                            <ul class="info-list">
+                                <li>
+                                    <span>Name :-</span><a href="#">
+                                        <?php echo $admin['adminName'] ?>
+                                    </a>
+                                </li>
+                                <li>
+                                    <span>Email :- </span><a href="#">
+                                        <?php echo $admin['adminEmail']; ?>
+                                    </a>
+                                </li>
+                                <li>
+                                    <span>Mobile :- </span><a href="#">
+                                        <?php echo $admin['adminMobile']; ?>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Top Right -->
+                        <div class="top-right pull-right clearfix">
+                            <!-- Login Nav -->
+                            <ul class="login-nav">
+                                <li><a href="#">Logout</a></li>
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="#">Youtube</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <section class="student-profile-section">
+        <section class="student-profile-section">
 
-        <div class="circle-one"></div>
-        <div class="circle-two"></div>
-        <div class="auto-container">
-            <div class="row clearfix">
-                <!-- Image Section -->
-                <div class="image-column col-lg-3 col-md-12 col-sm-12">
-                    <div class="inner-column">
-                        <div class="image">
-                            <img src="../assets/images/resource/image-1.jpg" alt=""/>
-                        </div>
-                        <h4>
-                            Neel Prasanna
-                        </h4>
-                        <div class="text">
-                            neel@gmail.com
-                        </div>
-                        <div class="text">
-                            0658463442
-                        </div>
+            <div class="circle-one"></div>
+            <div class="circle-two"></div>
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <!-- Image Section -->
+                    <div class="image-column col-lg-3 col-md-12 col-sm-12">
+                        <div class="inner-column">
+                            <div class="image">
+                                <img src="../assets/images/resource/image-1.jpg" alt="" />
+                            </div>
+                            <h4>
+                                Neel Prasanna
+                            </h4>
+                            <div class="text">
+                                neel@gmail.com
+                            </div>
+                            <div class="text">
+                                0658463442
+                            </div>
 
-                        <ul class="student-editing">
-                            <li data-tab="#prod-setting" class="tab-btn"><a>Edit Account</a></li>
-                        </ul>
+                            <ul class="student-editing">
+                                <li data-tab="#prod-setting" class="tab-btn"><a>Edit Account</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="content-column col-lg-9 col-md-12 col-sm-12">
-                    <div class="inner-column">
+                    <div class="content-column col-lg-9 col-md-12 col-sm-12">
+                        <div class="inner-column">
 
-                        <!-- Profile Info Tabs-->
-                        <div class="profile-info-tabs">
-                            <!-- Profile Tabs-->
-                            <div class="profile-tabs tabs-box">
+                            <!-- Profile Info Tabs-->
+                            <div class="profile-info-tabs">
+                                <!-- Profile Tabs-->
+                                <div class="profile-tabs tabs-box">
 
-                                <!--Tab Btns-->
-                                <ul class="tab-btns tab-buttons clearfix">
-                                    <li data-tab="#prod-overview" class="tab-btn active-btn">Main</li>
-                                    <li data-tab="#prod-billing" class="tab-btn">Billing</li>
-                                    <li data-tab="#prod-student" class="tab-btn">Student</li>
-                                    <li data-tab="#prod-batch" class="tab-btn">Batch</li>
-                                    <li data-tab="#prod-subjectmanage" class="tab-btn">Subject</li>
-                                    <li data-tab="#prod-video" class="tab-btn">Video</li>
-                                </ul>
+                                    <!--Tab Btns-->
+                                    <ul class="tab-btns tab-buttons clearfix">
+                                        <li data-tab="#prod-overview" class="tab-btn active-btn">Main</li>
+                                        <li data-tab="#prod-billing" class="tab-btn">Billing</li>
+                                        <li data-tab="#prod-student" class="tab-btn">Student</li>
+                                        <li data-tab="#prod-batch" class="tab-btn">Batch</li>
+                                        <li data-tab="#prod-subjectmanage" class="tab-btn">Subject</li>
+                                        <li data-tab="#prod-video" class="tab-btn">Video</li>
+                                    </ul>
 
-                                <!--Tabs Container-->
-                                <div class="tabs-content">
+                                    <!--Tabs Container-->
+                                    <div class="tabs-content">
 
-                                    <!--Tab / Active Tab-->
-                                    <div class="tab active-tab" id="prod-overview">
-                                        <div class="content">
+                                        <!--Tab / Active Tab-->
+                                        <div class="tab active-tab" id="prod-overview">
+                                            <div class="content">
 
-                                            <?php
+                                                <?php
                                             include_once "./overview.admin.php";
                                             ?>
 
-                                        </div>
-                                    </div>
-
-                                    <!-- Tab -->
-                                    <div class="tab" id="prod-billing">
-                                        <div class="content">
-
-                                            <div class="row clearfix">
-                                                <div class="col-12">
-                                                    <h6>Select Month</h6>
-                                                    <select class="form-select" id="getbatchGrade">
-                                                        <option selected value="12">January</option>
-                                                        <option value="12">February</option>
-                                                        <option value="12">March</option>
-                                                    </select>
-
-                                                    <div class="input-group mb-1 mt-2">
-                                                        <span class="input-group-text"
-                                                              id="basic-addon1">Student Mobile</span>
-                                                        <input class="form-control" list="datalistOptions"
-                                                               id="mobileNumberGet" placeholder="Type to search..."
-                                                               oninput="getMobileNumber()">
-                                                        <datalist id="datalistOptions">
-
-                                                        </datalist>
-                                                    </div>
-
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text" id="InvoicePrice">Price :-</span>
-                                                        <input type="number" class="form-control" placeholder="Price"
-                                                               aria-label="Username" aria-describedby="InvoicePrice">
-                                                    </div>
-
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text" id="showID">Invoice ID :</span>
-                                                        <input type="text" id="getInvoiceID" disabled
-                                                               class="form-control" placeholder="Invoice ID">
-                                                    </div>
-
-
-                                                </div>
                                             </div>
-
-
                                         </div>
-                                    </div>
-                                    <div class="tab" id="prod-batch">
-                                        <div class="content">
 
-                                            <div class="row clearfix">
-                                                <div class="col-12 mt-1">
-                                                    <div class="row">
-                                                        <div class="col-12 mt-1">
-                                                            <h4>Register a Batch</h4>
+                                        <!-- Tab -->
+                                        <div class="tab" id="prod-billing">
+                                            <div class="content">
+
+                                                <div class="row clearfix">
+                                                    <div class="col-12">
+                                                        <h6>Select Month</h6>
+                                                        <select class="form-select" id="invoiceMonth">
+                                                            <?php
+                                                        foreach ($pdo->query('SELECT `id` , `monthName` FROM month')->fetchAll(PDO::FETCH_ASSOC) as $month) {
+                                                            echo "<option value='{$month['id']}'>{$month['monthName']}</option>";
+                                                        }
+                                                        ?>
+                                                        </select>
+
+                                                        <div class="input-group mb-1 mt-2">
+                                                            <span class="input-group-text" id="basic-addon1">Student
+                                                                Mobile</span>
+                                                            <input class="form-control" list="datalistOptions"
+                                                                id="mobileNumberGet" placeholder="Type to search..."
+                                                                oninput="getMobileNumber()">
+                                                            <datalist id="datalistOptions">
+
+                                                            </datalist>
                                                         </div>
-                                                        <div class="col-12 mt-2">
-                                                            <div class="input-group ">
-                                                                <span class="input-group-text" id="basic-addon1">Batch Name</span>
-                                                                <input type="text" id="getBatchName"
-                                                                       class="form-control" placeholder="batch Name"
-                                                                       aria-label="batch Name"
-                                                                       aria-describedby="basic-addon1">
+
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="InvoicePrice">Price
+                                                                :-</span>
+                                                            <input type="number" class="form-control"
+                                                                placeholder="Price" id="invoicePrice"
+                                                                aria-label="Username" aria-describedby="invoicePrice">
+                                                        </div>
+
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="showID">Invoice ID
+                                                                :</span>
+                                                            <input type="text" id="getInvoiceID" disabled
+                                                                class="form-control" placeholder="Invoice ID">
+                                                        </div>
+                                                        <div class="input-group mb-3">
+                                                            <button class="btn btn-primary"
+                                                                onclick="makeInvoice();">Make Payment</button>
+                                                        </div>
+
+                                                        <section>
+                                                            <div class="container-fluid">
+                                                                <div class="row" id="paymentData">
+
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-12 mt-2">
-                                                            <select class="form-select" id="getbatchGrade">
-                                                                <option selected value="12">Greade 12</option>
-                                                                <option selected value="13">Greade 13</option>
-                                                            </select>
-                                                        </div>
+                                                        </section>
+                                                    </div>
+                                                </div>
 
 
-                                                        <div class="col-12 mt-2">
-                                                            <select class="form-select" id="getbatchCityId">
-                                                                <option selected value="null">Select City For Batch
-                                                                </option>
-                                                                <?php
+                                            </div>
+                                        </div>
+                                        <div class="tab" id="prod-batch">
+                                            <div class="content">
+
+                                                <div class="row clearfix">
+                                                    <div class="col-12 mt-1">
+                                                        <div class="row">
+                                                            <div class="col-12 mt-1">
+                                                                <h4>Register a Batch</h4>
+                                                            </div>
+                                                            <div class="col-12 mt-2">
+                                                                <div class="input-group ">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon1">Batch Name</span>
+                                                                    <input type="text" id="getBatchName"
+                                                                        class="form-control" placeholder="batch Name"
+                                                                        aria-label="batch Name"
+                                                                        aria-describedby="basic-addon1">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 mt-2">
+                                                                <select class="form-select" id="getbatchGrade">
+                                                                    <option selected value="12">Greade 12</option>
+                                                                    <option selected value="13">Greade 13</option>
+                                                                </select>
+                                                            </div>
+
+
+                                                            <div class="col-12 mt-2">
+                                                                <select class="form-select" id="getbatchCityId">
+                                                                    <option selected value="null">Select City For Batch
+                                                                    </option>
+                                                                    <?php
                                                                 $getCityData = $pdo->prepare('SELECT * FROM city');
                                                                 $getCityData->execute();
                                                                 while ($CityData = $getCityData->fetch(PDO::FETCH_ASSOC)) {
@@ -211,182 +227,241 @@ include_once "../components/preloader.component.php";
                                                                     <?php
                                                                 }
                                                                 ?>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-12 mt-2">
-                                                            <button class="btn btn-primary" onclick="addNewBatch();">ADD
-                                                                BATCH
-                                                            </button>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-12 mt-2">
+                                                                <button class="btn btn-primary"
+                                                                    onclick="addNewBatch();">ADD
+                                                                    BATCH
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="col-12 mt-1">
-                                                    <h4>Registed Batch</h4>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <select class="form-select" id="getLoadedBatch">
-                                                                <option selected>Select Batch</option>
-                                                                <?php
+                                                    <div class="col-12 mt-1">
+                                                        <h4>Registed Batch</h4>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <select class="form-select" id="getLoadedBatch">
+                                                                    <option selected>Select Batch</option>
+                                                                    <?php
                                                                 $getBatchData = $pdo->prepare('SELECT * FROM batch where batchStatus = ? ');
                                                                 $getBatchData->execute(['1']);
                                                                 while ($rowOfBatchData = $getBatchData->fetch(PDO::FETCH_ASSOC)) {
                                                                     ?>
-                                                                    <option value="<?php echo $rowOfBatchData['batchId']; ?>">
+                                                                    <option
+                                                                        value="<?php echo $rowOfBatchData['batchId']; ?>">
                                                                         <?php echo $rowOfBatchData['batchName']; ?>
                                                                     </option>
                                                                     <?php
                                                                 }
                                                                 ?>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-12 mt-2">
-                                                            <button class="btn btn-primary" onclick="checkStudents();">
-                                                                Check Students
-                                                            </button>
-                                                            <button class="btn btn-danger" onclick="turnOffbatch();">
-                                                                Turn Off
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-12 mt-3">
-                                                            <table class="table rounded rounded-3">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th scope="col">#</th>
-                                                                    <th scope="col">Mobile</th>
-                                                                    <th scope="col">First Name</th>
-                                                                    <th scope="col">Last Name</th>
-                                                                    <th scope="col">Email</th>
-                                                                    <th scope="col">Status</th>
-                                                                    <th scope="col">Batch Name</th>
-                                                                    <th scope="col">Visit</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody id="table-body"
-                                                                       class="table-group-divider overflow-auto">
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-12 mt-2">
+                                                                <button class="btn btn-primary"
+                                                                    onclick="checkStudents();">
+                                                                    Check Students
+                                                                </button>
+                                                                <button class="btn btn-danger"
+                                                                    onclick="turnOffbatch();">
+                                                                    Turn Off
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-12 mt-3">
+                                                                <table class="table rounded rounded-3">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">#</th>
+                                                                            <th scope="col">Mobile</th>
+                                                                            <th scope="col">First Name</th>
+                                                                            <th scope="col">Last Name</th>
+                                                                            <th scope="col">Email</th>
+                                                                            <th scope="col">Status</th>
+                                                                            <th scope="col">Batch Name</th>
+                                                                            <th scope="col">Visit</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="table-body"
+                                                                        class="table-group-divider overflow-auto">
 
-                                                                </tbody>
-                                                            </table>
+                                                                    </tbody>
+                                                                </table>
 
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="col-12 mt-1">
-                                                    <h4>Down Batch</h4>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="row">
+                                                    <div class="col-12 mt-1">
+                                                        <h4>Down Batch</h4>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="row">
 
-                                                        <div class="col-12">
-                                                            <select class="form-select" id="getOffBatch">
-                                                                <option selected>Select Batch</option>
-                                                                <?php
+                                                            <div class="col-12">
+                                                                <select class="form-select" id="getOffBatch">
+                                                                    <option selected>Select Batch</option>
+                                                                    <?php
                                                                 $getBatchData = $pdo->prepare('SELECT * FROM batch where batchStatus = ? ');
                                                                 $getBatchData->execute(['0']);
                                                                 while ($rowOfBatchData = $getBatchData->fetch(PDO::FETCH_ASSOC)) {
                                                                     ?>
-                                                                    <option value="<?php echo $rowOfBatchData['batchId']; ?>">
+                                                                    <option
+                                                                        value="<?php echo $rowOfBatchData['batchId']; ?>">
                                                                         <?php echo $rowOfBatchData['batchName']; ?>
                                                                     </option>
                                                                     <?php
                                                                 }
                                                                 ?>
-                                                            </select>
-                                                        </div>
+                                                                </select>
+                                                            </div>
 
-                                                        <div class="col-12 mt-2">
-                                                            <button class="btn btn-success" onclick="turnOnBatch();">
-                                                                Turn On
-                                                            </button>
+                                                            <div class="col-12 mt-2">
+                                                                <button class="btn btn-success"
+                                                                    onclick="turnOnBatch();">
+                                                                    Turn On
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
-
                                         </div>
-                                    </div>
 
-                                    <div class="tab" id="prod-video">
-                                        <div class="content">
+                                        <div class="tab" id="prod-video">
+                                            <div class="content">
 
-                                            <div class="row clearfix">
-                                                <?php
+                                                <div class="row clearfix">
+                                                    <?php
                                                 include_once "./video.admin.php";
                                                 ?>
-
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <!-- Tab -->
-                                    <div class="tab" id="prod-student">
-                                        <div class="content">
+                                        <!-- Tab -->
+                                        <div class="tab" id="prod-student">
                                             <div class="content">
-                                                <div class="container-fluid">
-                                                    <?php
+                                                <div class="content">
+                                                    <div class="container-fluid">
+                                                        <?php
                                                     include_once "./student.admin.php";
                                                     ?>
-                                                </div>
-                                                <!-- Title Box -->
-
-                                                <!-- Profile Form -->
-                                                <div class="profile-form">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="tab" id="prod-student">
-                                        <div class="content">
-
-                                            <div class="content">
-
-                                                <!-- Title Box -->
-                                                <div class="title-box">
-                                                    <h5>Edit Account Details</h5>
-                                                </div>
-                                                <!-- Profile Form -->
-                                                <div class="profile-form">
+                                                    </div>
+                                                    <!-- Title Box -->
 
                                                     <!-- Profile Form -->
+                                                    <div class="profile-form">
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="tab" id="prod-subjectmanage">
-                                        <div class="content">
 
+                                        <div class="tab" id="prod-student">
                                             <div class="content">
-                                                <?php
-                                                include_once "./subjectmanage.admin.php";
-                                                ?>
+
+                                                <div class="content">
+
+                                                    <!-- Title Box -->
+                                                    <div class="title-box">
+                                                        <h5>Edit Account Details</h5>
+                                                    </div>
+                                                    <!-- Profile Form -->
+                                                    <div class="profile-form">
+
+                                                        <!-- Profile Form -->
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="tab" id="prod-subjectmanage">
+                                            <div class="content">
 
+                                                <div class="content">
+                                                    <?php
+                                                include_once "./subjectmanage.admin.php";
+                                                ?>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-    </section>
-</div>
+        </section>
+    </div>
 
-<?php
+    <?php
 include_once "./adminComponents/body.admin.php";
 ?>
 
-<script>
+    <script>
     let subjectID;
 
+    const makeInvoice = () => {
+        const studentMobile = $("#mobileNumberGet").val();
+        const invoiceMonthId = $("#invoiceMonth").val();
+        const invoicePrice = $("#invoicePrice").val();
+        const invoiceId = $("#getInvoiceID").val();
+
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Process The Invoice!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Process!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'add_invoice.php', // Path to your PHP script
+                    data: {
+                        studentMobile: studentMobile,
+                        invoiceMonthId: invoiceMonthId,
+                        invoicePrice: invoicePrice,
+                        invoiceId: invoiceId
+                    },
+                    success: function(response) {
+                        if (response == 'success') {
+                            Swal.fire({
+                                title: 'Success',
+                                text: 'Invoice has been processed and added to the database.',
+                                icon: 'success'
+                            });
+                            getUniqueInvoiceId();
+                            getStudentPaymentData(studentMobile);
+                        } else {
+                            console.log(response)
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'An error occurred while processing the invoice.',
+                            icon: 'error'
+                        });
+                    }
+                });
+            }
+        });
+    };
+
     const getMobileNumber = () => {
-        const studentMobile = document.getElementById("mobileNumberGet").value;
+        const studentMobile = $("#mobileNumberGet").val();
+
+        if (studentMobile.length == 10) {
+            getStudentPaymentData(studentMobile);
+        }
 
         console.log(studentMobile);
         $.ajax({
@@ -395,8 +470,8 @@ include_once "./adminComponents/body.admin.php";
             data: {
                 studentMobile: studentMobile
             },
-            success: function (response) {
-                console.log(response);
+            success: function(response) {
+
                 const suggestions = JSON.parse(response);
                 const suggestionsElement = document.getElementById("datalistOptions");
 
@@ -404,9 +479,8 @@ include_once "./adminComponents/body.admin.php";
                 while (suggestionsElement.firstChild) {
                     suggestionsElement.removeChild(suggestionsElement.firstChild);
                 }
-
                 const fragment = document.createDocumentFragment();
-                suggestions.forEach(function (suggestion) {
+                suggestions.forEach(function(suggestion) {
                     const option = document.createElement("option");
                     option.value = suggestion;
                     fragment.appendChild(option);
@@ -417,17 +491,65 @@ include_once "./adminComponents/body.admin.php";
         });
     };
 
+    const getStudentPaymentData = (studentMobile) => {
+        $.ajax({
+            url: 'getStudentInvoiceData.admin.php',
+            type: 'POST',
+            data: {
+                student_id: studentMobile
+            },
+            success: function(response) {
+                let studentData = JSON.parse(response);
+                let paymentDataRow = $('#paymentData');
+                paymentDataRow.html('');
+                studentData.forEach(function(invoiceItem) {
+                    paymentDataRow.append(`
+<div class="col-12 col-sm-3 col-lg-3 bg-white rounded-5 m-sm-1 mt-3 mt-md-0">
+                                                                    <div class="row">
+                                                                        <div class="col-12 text-start bg-light-subtle">
+                                                                            <h6 class="m-2 text-center"> ɪꜱꜱᴜᴇᴅ ᴅᴀᴛᴇ : ${invoiceItem.payedDate} </h6>
+                                                                        </div>
+                                                                        <div class="col-12 text-start"
+                                                                             style="background-color: #eff1f3;">
+                                                                            <h6 class="m-2"><i class="fa fa-user"></i>
+                                                                                ᴍᴏɴᴛʜ: ${invoiceItem.monthName} </h6>
+                                                                        </div>
+                                                                        <div class="col-12 text-start"
+                                                                             style="background-color: #eaeaea;">
+                                                                            <h6 class="m-2"><i class="fa fa-atom"></i>
+                                                                                ʏᴇᴀʀ : ${invoiceItem.yearName} </h6>
+                                                                        </div>
+                                                                        <div class="col-12 text-start"
+                                                                             style="background-color: #e5e6e4;">
+                                                                            <h6 class="m-2"><i class="fa fa-clock"></i>
+                                                                                ʙᴀᴛᴄʜ ɴᴀᴍᴇ: ${invoiceItem.batchName} </h6>
+                                                                        </div>
+                                                                        <div class="col-12 text-start"
+                                                                             style="background-color: #cfd2cd;">
+                                                                            <h6 class="m-2"><i class="fa fa-earth"></i>
+                                                                                ᴘʀɪᴄᴇ: ${invoiceItem.price} .00</h6>
+                                                                        </div>
+                                                                        <div class="col-12 text-start"
+                                                                             style="background-color: #1d3557; height: 50px;">
+                                                                            <h6 class="m-2 text-white"><i
+                                                                                        class="fa fa-earth"></i> ɪᴅ :
+                                                                                #${invoiceItem.invoiceId} </h6>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>`);
+                });
+            }
+        });
+    };
 
     function getUniqueInvoiceId() {
         $.ajax({
             url: './invoiceId.php',
             type: 'POST',
-            success: function (response) {
-                // Handle the unique ID returned from PHP
-                console.log('Unique Invoice ID:', response);
-                $('#getInvoiceID').val(`#${response}`);
+            success: function(response) {
+                $('#getInvoiceID').val(`${response}`);
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.error('Error:', status, error);
             }
         });
@@ -441,7 +563,7 @@ include_once "./adminComponents/body.admin.php";
             data: {
                 batchID: batchID
             },
-            success: function (response) {
+            success: function(response) {
                 const students = JSON.parse(response);
                 $('#table-body').empty();
                 students.forEach((student, index) => {
@@ -458,7 +580,7 @@ include_once "./adminComponents/body.admin.php";
                     $('#table-body').append(row);
                 });
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.log(xhr.responseText);
             }
         });
@@ -484,7 +606,7 @@ include_once "./adminComponents/body.admin.php";
             data: formData,
             contentType: false,
             processData: false,
-            success: function (response) {
+            success: function(response) {
                 if (response == 'success') {
                     swalWithBootstrapButtons.fire(
                         'ON!',
@@ -495,7 +617,7 @@ include_once "./adminComponents/body.admin.php";
                 }
 
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.log(xhr.responseText);
             }
         });
@@ -524,7 +646,7 @@ include_once "./adminComponents/body.admin.php";
                     data: formData,
                     contentType: false,
                     processData: false,
-                    success: function (response) {
+                    success: function(response) {
                         console.log(response);
                         if (response == 'success') {
                             swalWithBootstrapButtons.fire(
@@ -536,7 +658,7 @@ include_once "./adminComponents/body.admin.php";
                         }
 
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         console.log(xhr.responseText);
                     }
                 });
@@ -580,7 +702,7 @@ include_once "./adminComponents/body.admin.php";
                         data: formData,
                         contentType: false,
                         processData: false,
-                        success: function (response) {
+                        success: function(response) {
                             if (response == 'success') {
                                 Swal.fire({
                                     icon: 'success',
@@ -591,7 +713,7 @@ include_once "./adminComponents/body.admin.php";
                                 console.log(response);
                             }
                         },
-                        error: function (xhr, status, error) {
+                        error: function(xhr, status, error) {
                             console.log(xhr.responseText);
                         }
                     });
@@ -614,10 +736,10 @@ include_once "./adminComponents/body.admin.php";
             data: formData,
             contentType: false,
             processData: false,
-            success: function (response) {
+            success: function(response) {
                 $('#loadBatchhasVideoData').html(response);
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.log(xhr.responseText);
             }
         });
@@ -653,11 +775,11 @@ include_once "./adminComponents/body.admin.php";
             data: formData,
             contentType: false,
             processData: false,
-            success: function (response) {
+            success: function(response) {
                 Swal.fire(response);
                 loadVideosToBatch();
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.log(xhr.responseText);
             }
         });
@@ -677,11 +799,11 @@ include_once "./adminComponents/body.admin.php";
             data: formData,
             contentType: false,
             processData: false,
-            success: function (response) {
+            success: function(response) {
                 swal.fire(response);
                 loadVideosToBatch();
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.log(xhr.responseText);
             }
         });
@@ -695,10 +817,10 @@ include_once "./adminComponents/body.admin.php";
             data: {
                 subjectId: selectedSubjectId
             },
-            success: function (response) {
+            success: function(response) {
                 $('#loadVideoData').html(response);
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.log(xhr.responseText);
             }
         });
@@ -707,10 +829,10 @@ include_once "./adminComponents/body.admin.php";
         $.ajax({
             url: './getPrivateVideoData.admin.php',
             type: 'POST',
-            success: function (response) {
+            success: function(response) {
                 $('#loadPrivateVideoData').html(response);
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.log(xhr.responseText);
             }
         });
@@ -719,10 +841,10 @@ include_once "./adminComponents/body.admin.php";
         $.ajax({
             url: './getPrivateVideoDataPrivate.admin.php',
             type: 'POST',
-            success: function (response) {
+            success: function(response) {
                 $('#loadPrivateVideoDataVithVideo').html(response);
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.log(xhr.responseText);
             }
         });
@@ -731,41 +853,76 @@ include_once "./adminComponents/body.admin.php";
     setnotSetVideoData();
 
     const openVideoLink = () => {
-        let selectedOption = $('#loadVideoData option:selected');
-        let videoLink = selectedOption.attr('data-videoLink');
-        let videoTYLink = selectedOption.attr('data-videoYtLink');
+    let selectedOption = $('#loadVideoData option:selected');
+    let videoLink = selectedOption.attr('data-videoLink');
+    let videoTYLink = selectedOption.attr('data-videoYtLink');
 
-        if (videoLink == "null") {
-            // If videoLink is null, play the YouTube video using videoTYLink
-            $('#videoSource').attr('src', ''); // Clear the videoSource
-            videojs('UnitVideoLink').reset(); // Reset the videojs player
+    if (!videoLink) {
+        // Hide local video player
+        $('#videoPlayerContainer').hide();
+        
+        // Show YouTube iframe
+        $('#ytVideoFrame').attr('src', `https://www.youtube.com/embed/${videoTYLink}`);
+        $('#ytVideoFrame').show();
+    } else {
+        // Hide YouTube iframe
+        $('#ytVideoFrame').hide();
+        
+        // Show local video player
+        $('#videoPlayerContainer').show();
 
-            // Set the src attribute of the iframe to the YouTube video link
-            $('#ytVideoFrame').attr('src', `https://www.youtube.com/embed/${videoTYLink}`);
-            $('#ytVideoFrame').show(); // Show the iframe if it was hidden before
-
-        } else {
-            $('#ytVideoFrame').hide(); // Hide the YouTube iframe
-            $('#videoSource').attr('src', videoLink);
-            videojs('UnitVideoLink').src(videoLink);
-            videojs('UnitVideoLink').load();
-            videojs('UnitVideoLink').play();
-        }
+        // Update Video.js player source and play the video
+        videojs('UnitVideoLink').src({
+            type: 'video/mp4',
+            src: videoLink
+        });
+        videojs('UnitVideoLink').load();
+        videojs('UnitVideoLink').play();
     }
+};
 
 
     const uploadVdieoLink = () => {
         let videoType = $('#videoType').val();
         let videoUnit = $('#videoUnit').val();
+        let VideoName = $('#uploadVideoName').val();
         let VideoLink = $('#uploadVideoYtLink').val();
 
-        if (!videoUnit || !videoType || !VideoLink) {
+        if (videoUnit == "" || videoType == "" || VideoLink == "" || VideoName == "") {
             swal.fire("Please select video unit, video privacy, and choose a video Link.");
+        } else {
 
+            let formData = new FormData();
+            formData.append('videoUnit', videoUnit);
+            formData.append('videoType', videoType);
+            formData.append('VideoLink', VideoLink);
+            formData.append('VideoName', VideoName);
+
+            $.ajax({
+                url: 'upload_video_link.php',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                xhr: function() {
+                    let xhr = new XMLHttpRequest();
+                    xhr.upload.addEventListener('progress', function(event) {
+                        if (event.lengthComputable) {
+                            let progress = Math.round((event.loaded / event.total) * 100);
+                            $('.progress-bar').width(progress + '%').text(progress + '%');
+                        }
+                    });
+                    return xhr;
+                },
+                success: function(response) {
+                    swal.fire(response);
+                },
+                error: function(xhr, status, error) {
+                    swal.fire(xhr.responseText);
+                }
+            });
         }
-
-    }
-
+    };
 
     const UploadVideo = () => {
         let videoType = $('#videoType').val();
@@ -790,9 +947,9 @@ include_once "./adminComponents/body.admin.php";
             data: formData,
             processData: false,
             contentType: false,
-            xhr: function () {
+            xhr: function() {
                 let xhr = new XMLHttpRequest();
-                xhr.upload.addEventListener('progress', function (event) {
+                xhr.upload.addEventListener('progress', function(event) {
                     if (event.lengthComputable) {
                         let progress = Math.round((event.loaded / event.total) * 100);
                         $('.progress-bar').width(progress + '%').text(progress + '%');
@@ -800,11 +957,11 @@ include_once "./adminComponents/body.admin.php";
                 });
                 return xhr;
             },
-            success: function (response) {
+            success: function(response) {
                 swal.fire(response);
 
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 swal.fire(xhr.responseText);
             }
         });
@@ -835,7 +992,7 @@ include_once "./adminComponents/body.admin.php";
                 data: formdata,
                 contentType: false,
                 processData: false,
-                success: function (data) {
+                success: function(data) {
 
                     if (data == 'success') {
                         Swal.fire({
@@ -881,7 +1038,7 @@ include_once "./adminComponents/body.admin.php";
                 data: formdata,
                 contentType: false,
                 processData: false,
-                success: function (data) {
+                success: function(data) {
 
                     if (data == 'success') {
                         Swal.fire({
@@ -910,7 +1067,7 @@ include_once "./adminComponents/body.admin.php";
             data: {
                 subjectID: paramSubjectID
             },
-            success: function (data) {
+            success: function(data) {
                 let subjectData = JSON.parse(data);
                 subjectID = subjectData[0].id;
 
@@ -934,14 +1091,14 @@ include_once "./adminComponents/body.admin.php";
             data: {
                 studentMobile: studentMobile
             },
-            success: function (response) {
+            success: function(response) {
 
                 const suggestions = JSON.parse(response);
                 const suggestionsElement = document.getElementById("mobileSuggestions");
 
                 suggestionsElement.innerHTML = "";
 
-                suggestions.forEach(function (suggestion) {
+                suggestions.forEach(function(suggestion) {
                     const option = document.createElement("option");
                     option.value = suggestion;
                     suggestionsElement.appendChild(option);
@@ -954,7 +1111,7 @@ include_once "./adminComponents/body.admin.php";
     const gotoStudentProfile = (mobile) => {
         window.location.href = `./studentProfile.php?Studentmobile=${mobile}`;
     };
-</script>
+    </script>
 
 </body>
 

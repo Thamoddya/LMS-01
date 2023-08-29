@@ -19,6 +19,7 @@ session_start();
             .then((result) => {
                 return result.json()
             }).then((data) => {
+            console.log(data);
                 let videos = data.items
                 let videoContainer = document.querySelector(".youtube-container")
                 for (video of videos) {

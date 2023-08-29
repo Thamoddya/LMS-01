@@ -14,7 +14,7 @@
   <tbody class="table-group-divider overflow-auto">
 
     <?php
-    $getStudentDataGet = $pdo->prepare("SELECT * FROM student INNER JOIN batch ON student.batch_batchId = batch.batchId INNER JOIN attendingstatus ON student.attendingStatus_id = attendingstatus.id LIMIT 15 ");
+    $getStudentDataGet = $pdo->prepare("SELECT * FROM student INNER JOIN batch ON student.batch_batchId = batch.batchId INNER JOIN attendingstatus ON student.attendingStatus_id = attendingstatus.id WHERE `verifyed`= '1' OR `verifyed`= '0'  LIMIT 15 ");
     $getStudentDataGet->execute();
     $getStudentData = $getStudentDataGet->fetchAll(PDO::FETCH_ASSOC); // Fetch all rows
 

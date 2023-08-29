@@ -8,7 +8,7 @@ $mobile = $_POST['mobile'];
 $stmt = $pdo->prepare("INSERT INTO deletelog(deleteMObile,deletedDate) VALUES (?,NOW())");
 $stmt->execute([$mobile]);
 
-$stmt2=$pdo->prepare("DELETE FROM student WHERE mobile= ? ");
+$stmt2=$pdo->prepare("UPDATE student SET verifyed = '3' WHERE mobile= ? ");
 $stmt2->execute([$mobile]);
 
 echo "success";

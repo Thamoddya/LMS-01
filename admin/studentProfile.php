@@ -274,6 +274,7 @@ if($student==null){
                         contentType: false,
                         processData: false,
                         success: function(response) {
+                            console.log(response);
                             if (response == 'success') {
                                 swal.fire(
                                     'Success',
